@@ -1,0 +1,6 @@
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPClient/bin/Debug/TCPClient.exe
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPClient/bin/Debug/TCPClient.pdb
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPClient/obj/Debug/TCPClient.csprojAssemblyReference.cache
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPClient/obj/Debug/TCPClient.csproj.CoreCompileInputs.cache
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPClient/obj/Debug/TCPClient.exe
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPClient/obj/Debug/TCPClient.pdb

@@ -1,0 +1,6 @@
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPServer/bin/Debug/TCPServer.exe
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPServer/bin/Debug/TCPServer.pdb
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPServer/obj/Debug/TCPServer.csprojAssemblyReference.cache
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPServer/obj/Debug/TCPServer.csproj.CoreCompileInputs.cache
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPServer/obj/Debug/TCPServer.exe
+/Users/wankcn/Desktop/RiderProject/SocketTCP/TCPServer/obj/Debug/TCPServer.pdb
