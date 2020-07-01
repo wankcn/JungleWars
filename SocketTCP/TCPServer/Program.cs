@@ -107,7 +107,7 @@ namespace TCPServer
             IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, 4869);
 
             // 绑定ip和端口号
-            serverSocket.Bind(ipEndPoint);
+            serverSocket.Bind(ipEndPoint);  
 
             // 开始监听端口 设置50防止服务器崩溃 设置0表示不限制数量
             serverSocket.Listen(0); // 传递挂起的连接队列的最大长度 

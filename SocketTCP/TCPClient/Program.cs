@@ -21,23 +21,28 @@ namespace TCPClient
             Console.WriteLine(msg);
 
             // 数据循环发送
-            while (true)
-            {
-                string str = Console.ReadLine(); // 读取用户一行输入传送给服务器端
-                // 输入c关闭
-                if (str =="c")
-                {
-                    clientSocket.Close();
-                    return;
-                }
-                clientSocket.Send(Encoding.UTF8.GetBytes(str));
-            }
+            // while (true)
+            // {
+            //     string str = Console.ReadLine(); // 读取用户一行输入传送给服务器端
+            //     // 输入c关闭
+            //     if (str =="c")
+            //     {
+            //         clientSocket.Close();
+            //         return;
+            //     }
+            //     clientSocket.Send(Encoding.UTF8.GetBytes(str));
+            // }
             
             // 向服务端发送100条数据
-            // for (int i = 0; i < 100; i++)
-            // {
-            //     clientSocket.Send(Encoding.UTF8.GetBytes(i.ToString()));
-            // }
+            for (int i = 0; i < 200; i++)
+            {
+                // 每次传输数据之前会加上一个长度进行传输
+                clientSocket.Send(Message.GetBytes(i.ToString()));   
+            }
+            
+            
+            
+            
             
             // 分包测试
             // string str = "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
