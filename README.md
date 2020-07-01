@@ -1,7 +1,7 @@
 # JungleWars
 Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
-
+使用工具：MacOS/Unity2019/Rider2020/MySql8.0/Navicat
 
 ## 开发进度
 
