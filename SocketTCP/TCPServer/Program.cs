@@ -47,7 +47,7 @@ namespace TCPServer
             Socket clientSocket = serverSocket.EndAccept(ar);
             // 向客户端发送一条数据
             string msg = "Hello client!你好...";
-            byte[] data = System.Text.Encoding.UTF8.GetBytes(msg); // 按照utf8将一个字符串转换成byte数组
+            byte[] data = Encoding.UTF8.GetBytes(msg); // 按照utf8将一个字符串转换成byte数组
             clientSocket.Send(data); // Send传递byte数组，需要将字符串转换成byte数组 需要使用支持中文的编码
             // 持续不断的接收消息 BeginReceive()开始异步接收数据  偏移从0开始存，1024最大数量，事件方法，
             clientSocket.BeginReceive(dataBuffer, 0, 1024, SocketFlags.None, ReceiveCallBack, clientSocket);
@@ -117,13 +117,13 @@ namespace TCPServer
 
             // 向客户端发送一条数据
             string msg = "Hello client!你好...";
-            byte[] data = System.Text.Encoding.UTF8.GetBytes(msg); // 按照utf8将一个字符串转换成byte数组
+            byte[] data = Encoding.UTF8.GetBytes(msg); // 按照utf8将一个字符串转换成byte数组
             clientSocket.Send(data); // Send传递byte数组，需要将字符串转换成byte数组 需要使用支持中文的编码
 
             // 接收客户端一条消息 
             byte[] dataBuffer = new byte[1024]; // 接收时先定义一个数组
             int count = clientSocket.Receive(dataBuffer); // 知道数组中前count个是接收到的数据
-            string msgReceive = System.Text.Encoding.UTF8.GetString(dataBuffer, 0, count); // 转换成字符串
+            string msgReceive = Encoding.UTF8.GetString(dataBuffer, 0, count); // 转换成字符串
             Console.WriteLine(msgReceive);
 
             Console.ReadKey(); // 程序终止的太快，方便观察输出

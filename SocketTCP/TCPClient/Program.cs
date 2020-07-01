@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Net;
+using System.Text;
 
 namespace TCPClient
 {
@@ -16,7 +17,7 @@ namespace TCPClient
             byte[] data = new byte[1024]; // 接收时先定义一个数组
             int count = clientSocket.Receive(data); // 知道数组中前count个是接收到的数据
             // 调用玩Receive后整个程序会暂停在这里，直到当它接收到服务器信息的时候
-            string msg = System.Text.Encoding.UTF8.GetString(data, 0, count); // 转换成字符串
+            string msg = Encoding.UTF8.GetString(data, 0, count); // 转换成字符串
             Console.WriteLine(msg);
 
             // 数据循环发送
@@ -29,12 +30,35 @@ namespace TCPClient
                     clientSocket.Close();
                     return;
                 }
-                clientSocket.Send(System.Text.Encoding.UTF8.GetBytes(str));
+                clientSocket.Send(Encoding.UTF8.GetBytes(str));
             }
+            
+            // 向服务端发送100条数据
+            // for (int i = 0; i < 100; i++)
+            // {
+            //     clientSocket.Send(Encoding.UTF8.GetBytes(i.ToString()));
+            // }
+            
+            // 分包测试
+            // string str = "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456" +
+            //              "分包测试数据123456分包测试数据123456分包测试数据123456分包测试数据123456";
+            // clientSocket.Send(Encoding.UTF8.GetBytes(str));
             
             // Console.ReadKey(); // 程序终止的太快，方便观察输出
             // clientSocket.Close();
-            
+
         }
     }
 } 

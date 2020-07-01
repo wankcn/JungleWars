@@ -1,0 +1,6 @@
+/Users/wankcn/Desktop/RiderProject/SocketTCP/DataConversionByteAarray/bin/Debug/DataConversionByteAarray.exe
+/Users/wankcn/Desktop/RiderProject/SocketTCP/DataConversionByteAarray/bin/Debug/DataConversionByteAarray.pdb
+/Users/wankcn/Desktop/RiderProject/SocketTCP/DataConversionByteAarray/obj/Debug/DataConversionByteAarray.csprojAssemblyReference.cache
+/Users/wankcn/Desktop/RiderProject/SocketTCP/DataConversionByteAarray/obj/Debug/DataConversionByteAarray.csproj.CoreCompileInputs.cache
+/Users/wankcn/Desktop/RiderProject/SocketTCP/DataConversionByteAarray/obj/Debug/DataConversionByteAarray.exe
+/Users/wankcn/Desktop/RiderProject/SocketTCP/DataConversionByteAarray/obj/Debug/DataConversionByteAarray.pdb
