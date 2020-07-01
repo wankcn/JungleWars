@@ -1,7 +1,7 @@
 # JungleWars
 Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
-使用工具：MacOS/Unity2019/Rider2020/MySql8.0/Navicat
+使用工具：MacOS10.15/Unity2019/Rider2020/MySql8.0/Navicat15
 
 ## 开发进度
 
@@ -42,4 +42,6 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 3.[字节转换](https://blog.csdn.net/wankcn/article/details/107071861)
 
 4.[粘包、分包问题解决办法](https://editor.csdn.net/md/?articleId=107074772)
+
+5.[C#连接MySql数据库进行测试](https://editor.csdn.net/md/?articleId=107075998)
 
