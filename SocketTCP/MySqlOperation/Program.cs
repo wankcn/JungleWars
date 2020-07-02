@@ -15,7 +15,8 @@ namespace MySqlOperation
             MySqlConnection conn = new MySqlConnection(config);
             conn.Open();
 
-            #region 操作查询
+            #region 查询操作
+
             // string sql = "select *from user";
             // MySqlCommand cmd = new MySqlCommand(sql, conn);
             // // 对数据进行读取
@@ -27,14 +28,38 @@ namespace MySqlOperation
             //     Console.WriteLine(username + ":" + password);
             // }
             // reader.Close();
+
             #endregion
- 
-            string userName = "liuxiyi";
-            string pwd = "liuxiyi";
-            string sql = "insert into user set username='"+userName+"', password='"+pwd+"'";
-            MySqlCommand cmd = new MySqlCommand(sql , conn);
-            cmd.ExecuteNonQuery();
-            
+
+            #region 插入操作
+
+            // string userName = "wr";
+            // string pwd = "wr123';delete from user";
+            // string sql = "insert into user set username=@un,password=@pwd";
+            // MySqlCommand cmd = new MySqlCommand(sql, conn);
+            // cmd.Parameters.AddWithValue("un", userName);
+            // cmd.Parameters.AddWithValue("pwd", pwd);
+            // cmd.ExecuteNonQuery();
+
+            #endregion
+
+            #region 删除操作
+
+            // string sql = "delete from user where id=@id";
+            // MySqlCommand cmd = new MySqlCommand(sql, conn);
+            // cmd.Parameters.AddWithValue("id", 5);
+            // cmd.ExecuteNonQuery();
+
+            #endregion
+
+            #region 更新操作
+
+            // string sql = "update user set password=@pwd where id=4";
+            // MySqlCommand cmd = new MySqlCommand(sql, conn);
+            // cmd.Parameters.AddWithValue("pwd", "lover");
+            // cmd.ExecuteNonQuery();
+
+            #endregion
             conn.Close();
         }
     }
