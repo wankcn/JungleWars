@@ -33,9 +33,13 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 1. 开始编写游戏服务器端GameServer
 2. 创建Server类，Client类，Message类
 3. 创建类库Common，开发控制层
-4. 客户端与服务器端交互流程图
+4. 客户端多个request对应服务端一个controller，一个request负责发起一个请求并处理这个请求的响应
 
+#### 7月4日
 
+1. 采用中介者模式，创建controllerManager管理所有控制器
+2. 通过ControllerManager进行请求的分发处理
+3. 客户端请求的响应处理
 
 
 
