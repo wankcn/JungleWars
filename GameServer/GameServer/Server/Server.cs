@@ -4,18 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Net;
+using GameServer.Controller;
 
 namespace GameServer.Server
 {
     public class Server
     {
         private IPEndPoint ipEndPoint;
-
         private Socket serverSocket;
-
         // 管理所有客户端
         private List<Client> clientList;
-
+        // 不需要初始化参数，直接new构造
+        private ControllerManager controllerManager = new ControllerManager();
         public Server()
         {
         }
