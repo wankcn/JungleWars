@@ -32,7 +32,8 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 1. 开始编写游戏服务器端GameServer
 2. 创建Server类，Client类，Message类
-3. 一个controller处理一类请求
+3. 创建类库Common，开发控制层
+4. 客户端与服务器端交互流程图
 
 
 
