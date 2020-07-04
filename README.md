@@ -40,6 +40,7 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 1. 采用中介者模式，创建controllerManager管理所有控制器
 2. 通过ControllerManager进行请求的分发处理
 3. 客户端请求的响应处理
+4. client接收消息后转发给ControllerManager进行管理
 
 
 
