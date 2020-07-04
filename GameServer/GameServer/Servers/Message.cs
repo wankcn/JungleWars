@@ -2,6 +2,7 @@
 // 单一职责原则
 
 using System;
+using System.Linq;
 using System.Text;
 using Common;
 
@@ -59,6 +60,19 @@ namespace GameServer.Servers
                     break; // 数据不完整，等待新的数据接收
                 }
             }
+        }
+
+        // 响应时数据的包装 client将返回的数组发送给客户端
+        public static byte[] PackData(RequestCode requestData, string data)
+        {
+            // 转字节数组
+            byte[] requestCodeBytes = BitConverter.GetBytes((int) requestData);
+            byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+            // 数据长度  requestCodeBytes固定为4 
+            int dataAmount = 4 + dataBytes.Length;
+            byte[] dataAmountBytes = BitConverter.GetBytes(dataAmount);
+            // 进行组装 Concat一次只能组拼一个数组
+            return dataAmountBytes.Concat(requestCodeBytes).Concat(dataBytes);
         }
     }
 }

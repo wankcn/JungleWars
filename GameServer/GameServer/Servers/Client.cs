@@ -73,5 +73,12 @@ namespace GameServer.Servers
             // 将自身连接移除
             server.RemoveCLient(this);
         }
+
+        // 进行响应 数据包装发送
+        public void Send(RequestCode requestCode, string data)
+        {
+            byte[] bytes = Message.PackData(requestCode, data);
+            clientSocket.Send(bytes);
+        }
     }
 }
