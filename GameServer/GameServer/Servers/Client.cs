@@ -3,8 +3,9 @@
 using System;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using Common;
 
-namespace GameServer.Server
+namespace GameServer.Servers
 {
     public class Client
     {
@@ -45,7 +46,7 @@ namespace GameServer.Server
                 }
 
                 // 不为0时需要处理接收到的数据
-                msg.ReadMessage(count);
+                msg.ReadMessage(count, OnProcessMessage); // 提供一个递归函数
                 // 处理结束后要重新进行接收
                 Start();
             }
@@ -55,6 +56,12 @@ namespace GameServer.Server
                 Console.WriteLine(e);
                 CLose();
             }
+        }
+
+        // 作为递归函数传递
+        private void OnProcessMessage(RequestCode requestCode, ActionCode actionCode, string data)
+        {
+            server.HandleRequest(requestCode, actionCode, data, this);
         }
 
         // 断开连接的方法

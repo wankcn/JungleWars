@@ -1,9 +1,11 @@
 // 对接收的消息进行处理 
+// 单一职责原则
 
 using System;
 using System.Text;
+using Common;
 
-namespace GameServer.Server
+namespace GameServer.Servers
 {
     public class Message
     {
@@ -18,11 +20,11 @@ namespace GameServer.Server
         // 还剩余的空间
         public int RemainSize => data.Length - dataLength;
 
-        
+
         /// <summary>
-        /// 解析数据
+        /// 解析数据 定义一个事件，指定事件方法的类型
         /// </summary>
-        public void ReadMessage( int newDataAmount)
+        public void ReadMessage(int newDataAmount, Action<RequestCode, ActionCode, string> processDataCallBack)
         {
             dataLength += newDataAmount;
             while (true)
@@ -35,10 +37,17 @@ namespace GameServer.Server
                 // 读取剩余数据 大于等于时说明数据是完整的
                 if (dataLength - 4 >= length)
                 {
-                    Console.WriteLine(dataLength+":"+length);
-                    // 从4号索引开始读取数据
-                    string str = Encoding.UTF8.GetString(data, 4, length);
-                    Console.WriteLine("解析到一条数据：" + str);
+                    // Console.WriteLine(dataLength+":"+length);
+                    // // 从4号索引开始读取数据
+                    // string str = Encoding.UTF8.GetString(data, 4, length);
+                    // Console.WriteLine("解析到一条数据：" + str);
+
+                    // 先解析requestCode和ActionCode  只会解析4个数据
+                    RequestCode requestCode = (RequestCode) BitConverter.ToInt32(data, 4);
+                    ActionCode actionCode = (ActionCode) BitConverter.ToInt32(data, 8);
+                    // 数据从12的位置开始 length-8是剩余数据的字节长度
+                    string str = Encoding.UTF8.GetString(data, 12, length - 8);
+                    processDataCallBack(requestCode, actionCode, str);
                     // 把后面的数据前移，进行更新
                     Array.Copy(data, length + 4, data,
                         0, dataLength - length - 4);
@@ -53,5 +62,3 @@ namespace GameServer.Server
         }
     }
 }
-
- 

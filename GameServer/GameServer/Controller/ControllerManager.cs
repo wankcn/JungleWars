@@ -10,7 +10,8 @@
 using System;
 using System.Collections.Generic;
 using Common;
-using System.Reflection; // 反射
+using System.Reflection;
+using GameServer.Servers; // 反射
 
 namespace GameServer.Controller
 {
@@ -20,15 +21,18 @@ namespace GameServer.Controller
         private Dictionary<RequestCode, BaseController> controllerDict
             = new Dictionary<RequestCode, BaseController>();
 
+        private Server server;
+
         // 构造方法
-        public ControllerManager()
+        public ControllerManager(Server server)
         {
-            Init();
+            this.server = server;
+            InitController();
         }
 
         // 初始化所有Controller 根据当前服务器端有哪些Controller 并把它们实例化出来放到字典里
         // 处理请求的时候通过ControllerManager的字典找到对应controller进行处理
-        void Init()
+        void InitController()
         {
             DefaultController defaultController = new DefaultController();
             controllerDict.Add(defaultController.RequestCode, defaultController);
@@ -36,7 +40,8 @@ namespace GameServer.Controller
 
         // 服务端返回给客户端的数据需要处理
         // 通过requestCode找到 controller actioncode找到 controller里的方法   
-        public void HandleRequest(RequestCode requestCode, ActionCode actionCode, string data)
+        public void HandleRequest(RequestCode requestCode, ActionCode actionCode,
+            string data, Client client)
         {
             BaseController controller;
             bool isGet = controllerDict.TryGetValue(requestCode, out controller);
@@ -59,9 +64,19 @@ namespace GameServer.Controller
                                                      + "]中没有对于的处理方法：[" + methodName + "]");
                 return;
             }
-            object[] param = new object[]{data};
+
+            object[] param = new object[] {data, client, server};
             // 存在的 invoke(指定对象，)在指定对象中调用
-             object o = mi.Invoke(controller, param); // 根据这个返回值判断是否需要给客户端响应
+            object o = mi.Invoke(controller, param); // 根据这个返回值判断是否需要给客户端响应
+
+            // 当得到参数的时候
+            if (o == null || string.IsNullOrEmpty(o as string))
+            {
+                return;
+            }
+
+            // server向客户端发起响应 o转字符串 还要进行byte打包
+            server.SendResponse(client, requestCode, o as string);
         }
     }
 }

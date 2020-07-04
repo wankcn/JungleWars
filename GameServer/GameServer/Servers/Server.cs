@@ -4,18 +4,23 @@ using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Net;
+using Common;
 using GameServer.Controller;
 
-namespace GameServer.Server
+namespace GameServer.Servers
 {
     public class Server
     {
         private IPEndPoint ipEndPoint;
+
         private Socket serverSocket;
+
         // 管理所有客户端
         private List<Client> clientList;
+
         // 不需要初始化参数，直接new构造
-        private ControllerManager controllerManager = new ControllerManager();
+        private ControllerManager controllerManager;
+
         public Server()
         {
         }
@@ -23,6 +28,7 @@ namespace GameServer.Server
         public Server(string ipStr, int port)
         {
             SetIpAndPort(ipStr, port);
+            controllerManager = new ControllerManager(this); // this把当前对象传递过去
         }
 
         public void SetIpAndPort(string ipStr, int port)
@@ -60,6 +66,22 @@ namespace GameServer.Server
             {
                 clientList.Remove(client);
             }
+        }
+
+        // 给client客户端发起响应
+        //   客户端，响应的RequestCode 响应的字符串数据
+        public void SendResponse(Client client, RequestCode requestCode, string data) 
+        {
+            // 给客户端响应
+        }
+
+        // 用来处理消息的方法
+        public void HandleRequest(RequestCode requestCode, ActionCode actionCode,
+            string data, Client client)
+        {
+            // 把方法的调用传递给CcontrollerManager
+            // 通过sever中介，Manager与sercer交互 server与client交互 
+            controllerManager.HandleRequest(requestCode, actionCode, data, client);
         }
     }
 }
