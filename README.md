@@ -56,13 +56,13 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 ## CSDN开发笔记
 
-1.[TCP服务器端与多个客户端连接的C#代码实现](https://blog.csdn.net/wankcn/article/details/107007522)
+1. [TCP服务器端与多个客户端连接的C#代码实现](https://blog.csdn.net/wankcn/article/details/107007522)
 
-2.[TCP协议中的粘包分包问题](https://blog.csdn.net/wankcn/article/details/107063186)
+2. [TCP协议中的粘包分包问题](https://blog.csdn.net/wankcn/article/details/107063186)
 
-3.[字节转换](https://blog.csdn.net/wankcn/article/details/107071861)
+3. [字节转换](https://blog.csdn.net/wankcn/article/details/107071861)
 
-4.[粘包、分包问题解决办法](https://editor.csdn.net/md/?articleId=107074772)
+4. [粘包、分包问题解决办法](https://editor.csdn.net/md/?articleId=107074772)
 
-5.[C#连接MySql数据库进行测试](https://editor.csdn.net/md/?articleId=107075998)
+5. [C#连接MySql数据库进行测试](https://editor.csdn.net/md/?articleId=107075998)
 
