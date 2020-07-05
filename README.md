@@ -30,7 +30,7 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 #### 7月3日
 
-1. 开始编写游戏服务器端GameServer
+1. **开始游戏服务器端GameServer的开发**
 2. 创建Server类，Client类，Message类
 3. 创建类库Common，开发控制层
 4. 客户端多个request对应服务端一个controller，一个request负责发起一个请求并处理这个请求的响应
@@ -48,7 +48,11 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 1.完成了ConnHelper对数据库的连接，在客户端与服务端建立连接时创建的client中连接数据库，断连时也先断开数据库。
 
+2.**开始Unity客户端的开发**
 
+3.导入UIFramework和资源包res
+
+控制相机跟随指定角色 使用第三人称进行视野跟随
 
 
 
