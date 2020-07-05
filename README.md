@@ -42,7 +42,11 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 3. 客户端请求的响应处理
 4. client接收消息后转发给ControllerManager进行管理
 5. Message单一职责原则，只负责处理解析消息
-6. 完善对消息的处理以及传递给ControllerManager，controller处理完请求之后会有返回值，controllerManager会根据这个返回值判断是否需要给客户端响应。如果不为空，调用server.SendResponse给客户端响应。 
+6. 完善对消息的处理以及传递给ControllerManager，controller处理完请求之后会有返回值，controllerManager会根据这个返回值判断是否需要给客户端响应。如果不为空，调用server.SendResponse给客户端响应。
+
+#### 7 月5日
+
+
 
 
 
