@@ -4,6 +4,9 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using Common;
+using GameServer.Tool;
+using MySql.Data.MySqlClient;
+using GameServer.Tool;
 
 namespace GameServer.Servers
 {
@@ -14,6 +17,9 @@ namespace GameServer.Servers
         private Server server;
         private Message msg = new Message();
 
+        // 对数据库的连接
+        private MySqlConnection mysqlConn;
+
         public Client()
         {
         }
@@ -22,6 +28,7 @@ namespace GameServer.Servers
         {
             this.clientSocket = clientSocket;
             this.server = server;
+            mysqlConn = ConnHelper.Connect(); // 创建client时就建立连接
         }
 
         // start listen
@@ -67,6 +74,8 @@ namespace GameServer.Servers
         // 断开连接的方法
         private void CLose()
         {
+            // 客户端关闭时，先关闭与数据库的连接
+            ConnHelper.ClosConnection(mysqlConn);
             // 关闭连接
             if (clientSocket != null)
                 clientSocket.Close();
