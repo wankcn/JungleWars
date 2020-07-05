@@ -50,7 +50,7 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 2. **开始Unity客户端的开发**
 
-3. 导入UIFramework和资源包res
+3. 导入资源（UIFramework框架和Res游戏资源）
 4. 游戏客户端架构分析图
 
 
