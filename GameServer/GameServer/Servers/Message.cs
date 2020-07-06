@@ -72,7 +72,8 @@ namespace GameServer.Servers
             int dataAmount = 4 + dataBytes.Length;
             byte[] dataAmountBytes = BitConverter.GetBytes(dataAmount);
             // 进行组装 Concat一次只能组拼一个数组
-            return dataAmountBytes.Concat(requestCodeBytes).Concat(dataBytes);
+            byte[] newBytes = dataAmountBytes.Concat(requestCodeBytes).ToArray();
+            return newBytes.Concat(dataBytes).ToArray();
         }
     }
 }

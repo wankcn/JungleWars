@@ -1,0 +1,6 @@
+/Users/wankcn/Desktop/RiderProject/GameServer/Common/bin/Debug/Common.dll
+/Users/wankcn/Desktop/RiderProject/GameServer/Common/bin/Debug/Common.pdb
+/Users/wankcn/Desktop/RiderProject/GameServer/Common/obj/Debug/Common.csprojAssemblyReference.cache
+/Users/wankcn/Desktop/RiderProject/GameServer/Common/obj/Debug/Common.csproj.CoreCompileInputs.cache
+/Users/wankcn/Desktop/RiderProject/GameServer/Common/obj/Debug/Common.dll
+/Users/wankcn/Desktop/RiderProject/GameServer/Common/obj/Debug/Common.pdb
