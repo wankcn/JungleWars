@@ -55,7 +55,10 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 #### 7月6日
 
-1. 总结游戏客户端架构分析图文档
+1. 分析游戏客户端架构写成文档(对扩展开放，对修改关闭)
+2. Scripts-(Manager/Net) 脚本文件分为两类
+3. GameFacade放在场景当中，其余Manager不需要挂载在游戏物体上，由GameFacade直接进行管理
+4. 修改UIFramework中的UIManager符合现有框架
 
 
 
