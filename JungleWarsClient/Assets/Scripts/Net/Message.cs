@@ -13,7 +13,7 @@ public class Message
     private int dataLength = 0; // 从0开始存 数组里存了多少个字节的数据
 
     // 提供访问的方法
-    public byte[] Date => data;
+    public byte[] Data => data;
     public int StartIndex => dataLength;
 
     // 还剩余的空间
@@ -23,7 +23,7 @@ public class Message
     /// <summary>
     /// 解析数据 定义一个事件，指定事件方法的类型
     /// </summary>
-    public void ReadMessage(int newDataAmount, Action<RequestCode, ActionCode, string> processDataCallBack)
+    public void ReadMessage(int newDataAmount, Action<RequestCode, string> processDataCallBack)
     {
         dataLength += newDataAmount;
         while (true)
@@ -43,10 +43,9 @@ public class Message
 
                 // 先解析requestCode和ActionCode  只会解析4个数据
                 RequestCode requestCode = (RequestCode) BitConverter.ToInt32(data, 4);
-                ActionCode actionCode = (ActionCode) BitConverter.ToInt32(data, 8);
-                // 数据从12的位置开始 length-8是剩余数据的字节长度
-                string str = Encoding.UTF8.GetString(data, 12, length - 8);
-                processDataCallBack(requestCode, actionCode, str);
+                // 数据从8的位置开始 length-8是剩余数据的字节长度
+                string str = Encoding.UTF8.GetString(data, 8, length - 4);
+                processDataCallBack(requestCode, str);
                 // 把后面的数据前移，进行更新
                 Array.Copy(data, length + 4, data,
                     0, dataLength - length - 4);
@@ -70,7 +69,25 @@ public class Message
         int dataAmount = 4 + dataBytes.Length;
         byte[] dataAmountBytes = BitConverter.GetBytes(dataAmount);
         // 进行组装 Concat一次只能组拼一个数组
-        byte[] newBytes = dataAmountBytes.Concat(requestCodeBytes).ToArray();
-        return newBytes.Concat(dataBytes).ToArray();
+        byte[] newBytes = dataAmountBytes.Concat(requestCodeBytes).ToArray()
+            .Concat(dataBytes).ToArray();
+        return newBytes;
+    }
+
+    // 重载方法
+    public static byte[] PackData(RequestCode requestData, ActionCode actionCode, string data)
+    {
+        // 转字节数组
+        byte[] requestCodeBytes = BitConverter.GetBytes((int) requestData);
+        byte[] actionCodeBytes = BitConverter.GetBytes((int) actionCode);
+        byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+        // 数据长度  requestCodeBytes固定为4 actionCodeBytes固定长度也为4
+        int dataAmount = 8 + dataBytes.Length;
+        byte[] dataAmountBytes = BitConverter.GetBytes(dataAmount);
+        // 进行组装 Concat一次只能组拼一个数组
+        byte[] newBytes = dataAmountBytes.Concat(requestCodeBytes).ToArray()
+            .Concat(actionCodeBytes).ToArray()
+            .Concat(dataBytes).ToArray();
+        return newBytes;
     }
 }

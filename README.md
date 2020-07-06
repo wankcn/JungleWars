@@ -69,6 +69,12 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 6. 开发ClientManager，完成了与服务器端的连接和关闭
 
+#### 7月7日
+
+1. 为Unity项目更新common.dll动态链接库
+2. 完善客户端向服务器端发送消息的功能 Message/ClientManager
+3. 完善接收服务器端的消息并解析
+
 
 
 ## CSDN开发笔记
