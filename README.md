@@ -53,6 +53,10 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 3. 导入资源（UIFramework框架和Res游戏资源）
 4. 游戏客户端架构分析图
 
+#### 7月6日
+
+1. 总结游戏客户端架构分析图文档
+
 
 
 ## CSDN开发笔记
@@ -66,4 +70,5 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 4. [粘包、分包问题解决办法](https://editor.csdn.net/md/?articleId=107074772)
 
 5. [C#连接MySql数据库进行测试](https://editor.csdn.net/md/?articleId=107075998)
+6. [游戏客户端架构分析](https://blog.csdn.net/wankcn/article/details/107161186)
 
