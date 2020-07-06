@@ -16,6 +16,7 @@ public class ClientManager : BaseManager
 
     private Socket clientSocket;
     private Message msg = new Message(); // 数据存储与解析
+    public ClientManager(GameFacade facade) : base(facade) { }
 
     // 与服务器端建立连接
     // 监听OnInit方法

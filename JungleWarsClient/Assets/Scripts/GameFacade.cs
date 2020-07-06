@@ -25,12 +25,12 @@ public class GameFacade : MonoBehaviour
     // Manger构造与初始化
     private void InitManager()
     {
-        uiMng = new UIManager();
-        audioMng = new AudioManager();
-        playerMng = new PlayerManager();
-        cameraMng = new CameraManager();
-        requestMng = new RequestManager();
-        clientMng = new ClientManager();
+        uiMng = new UIManager(this);
+        audioMng = new AudioManager(this);
+        playerMng = new PlayerManager(this);
+        cameraMng = new CameraManager(this);
+        requestMng = new RequestManager(this);
+        clientMng = new ClientManager(this);
 
         uiMng.OnInit();
         audioMng.OnInit();
