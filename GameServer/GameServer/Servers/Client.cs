@@ -34,8 +34,8 @@ namespace GameServer.Servers
         // start listen
         public void Start()
         {
-            // buffer offset size 
-            clientSocket.BeginReceive(msg.Date, msg.StartIndex, msg.RemainSize,
+            // buffer offset size 异步接收
+            clientSocket.BeginReceive(msg.Data, msg.StartIndex, msg.RemainSize,
                 SocketFlags.None, ReceiveCallBack, null);
         }
 

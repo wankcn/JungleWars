@@ -15,7 +15,7 @@ namespace GameServer.Servers
         private int dataLength = 0; // 从0开始存 数组里存了多少个字节的数据
 
         // 提供访问的方法
-        public byte[] Date => data;
+        public byte[] Data => data;
         public int StartIndex => dataLength;
 
         // 还剩余的空间
@@ -72,8 +72,9 @@ namespace GameServer.Servers
             int dataAmount = 4 + dataBytes.Length;
             byte[] dataAmountBytes = BitConverter.GetBytes(dataAmount);
             // 进行组装 Concat一次只能组拼一个数组
-            byte[] newBytes = dataAmountBytes.Concat(requestCodeBytes).ToArray();
-            return newBytes.Concat(dataBytes).ToArray();
+            byte[] newBytes = dataAmountBytes.Concat(requestCodeBytes).ToArray()
+                .Concat(dataBytes).ToArray();
+            return newBytes;
         }
     }
 }
