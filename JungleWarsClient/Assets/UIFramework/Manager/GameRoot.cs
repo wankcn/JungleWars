@@ -5,7 +5,7 @@ public class GameRoot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        UIManager.Instance.PushPanel(UIPanelType.MainMenu);
+        // UIManager.Instance.PushPanel(UIPanelType.MainMenu);
 	}
 	
 
