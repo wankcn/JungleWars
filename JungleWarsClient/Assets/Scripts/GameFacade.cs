@@ -1,16 +1,37 @@
-﻿using System;
+﻿// 单例模式
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Common;
 using UnityEngine;
 
 public class GameFacade : MonoBehaviour
 {
+    private static GameFacade _instance; // 单例
+
+    // 提供get方法供外界调用
+    public static GameFacade Instance => _instance;
+
     private UIManager uiMng;
     private AudioManager audioMng;
     private PlayerManager playerMng;
     private CameraManager cameraMng;
     private RequestManager requestMng;
     private ClientManager clientMng;
+
+    private void Awake()
+    {
+        // 对instance进行赋值
+        if (_instance != null)
+        {
+            // 说明当前场景已经存在GameFacade
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
+    }
 
     void Start()
     {
@@ -55,5 +76,17 @@ public class GameFacade : MonoBehaviour
     private void OnDestroy()
     {
         DestroyManager();
+    }
+
+    // 提供addRequest方法方便BaseRequest调用 降低耦合性
+    public void AddRequest(RequestCode requestCode, BaseRequest request)
+    {
+        requestMng.AddRequest(requestCode, request);
+    }
+
+    // 销毁请求
+    public void RemoveRequest(RequestCode requestCode)
+    {
+        requestMng.RemoveRequest(requestCode);
     }
 }
