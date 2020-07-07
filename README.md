@@ -77,6 +77,7 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 3. 完善接收服务器端的消息并解析
 4. 修改BaseManager，为它提供一个GameFacade的引用用于各种管理器方便访问GameFacade
 5. 创建请求基类BaseRequset，用来发起请求。
+6. 完善了Request对象的管理（修改GameFacade单例模式，中介者模式，gameFacade调用RequestManager，BaseRequest调用GameFacade方法）
 
 
 
