@@ -82,7 +82,7 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 #### 7月8日
 
 1. 完善了ClientManager处理响应，中介者模式通过facade调用RequestManager的处理响应方法HandleResponse
-2. 
+2. 控制场景的视野漫游动画作为菜单界面背景
 
 
 
