@@ -1,4 +1,6 @@
-﻿using System;
+﻿// 解析服务器端消息，解析的消息转发给BaseRequest进行处理
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +18,10 @@ public class ClientManager : BaseManager
 
     private Socket clientSocket;
     private Message msg = new Message(); // 数据存储与解析
-    public ClientManager(GameFacade facade) : base(facade) { }
+
+    public ClientManager(GameFacade facade) : base(facade)
+    {
+    }
 
     // 与服务器端建立连接
     // 监听OnInit方法
@@ -51,14 +56,14 @@ public class ClientManager : BaseManager
         {
             // count收数据的字节长度
             int count = clientSocket.EndReceive(ar);
-            msg.ReadMessage(count,OnProcessMessage);
-            
+            msg.ReadMessage(count, OnProcessMessage);
         }
         catch (Exception e)
         {
             Debug.Log(e);
         }
     }
+
     // 作为递归函数传递给ReadMessage
     private void OnProcessMessage(RequestCode requestCode, string data)
     {
@@ -73,8 +78,7 @@ public class ClientManager : BaseManager
         // 将数据发送到服务器端
         clientSocket.Send(bytes);
     }
-
-
+    
     // 游戏销毁时候，连接也进行销毁
     public override void OnDestroy()
     {
@@ -88,4 +92,6 @@ public class ClientManager : BaseManager
             Debug.LogWarning("无法关闭与服务器端的连接" + e);
         }
     }
+    
+    
 }

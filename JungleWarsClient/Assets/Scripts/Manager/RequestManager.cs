@@ -27,4 +27,17 @@ public class RequestManager : BaseManager
     {
         requestDict.Remove(requestCode);
     }
+
+    // 用来进行响应的处理 string 服务器发送来的数据 
+    public void HandleReponse(RequestCode requestCode, string data)
+    {
+        // 根据requestCode在字典中查找到BaseRequest 通过Request里的OnReponse进行处理数据
+        BaseRequest request = requestDict.TryGet<RequestCode, BaseRequest>(requestCode);
+        if (request == null)
+        {
+            Debug.LogWarning("无法得到RequestCode[" + requestCode + "]对应的Request类");
+        }
+
+        request.OnResponse(data);
+    }
 }
