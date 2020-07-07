@@ -89,4 +89,10 @@ public class GameFacade : MonoBehaviour
     {
         requestMng.RemoveRequest(requestCode);
     }
+
+    // clientmanager 进行响应的处理 中转
+    public void HandleResponse(RequestCode requestCode, string data)
+    {
+        requestMng.HandleResponse(requestCode, data);
+    }
 }

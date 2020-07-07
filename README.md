@@ -79,6 +79,11 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 5. 创建请求基类BaseRequset，用来发起请求。
 6. 完善了Request对象的管理（修改GameFacade单例模式，中介者模式，gameFacade调用RequestManager，BaseRequest调用GameFacade方法）
 
+#### 7月8日
+
+1. 完善了ClientManager处理响应，中介者模式通过facade调用RequestManager的处理响应方法HandleResponse
+2. 
+
 
 
 

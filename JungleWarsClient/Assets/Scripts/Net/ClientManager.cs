@@ -57,6 +57,8 @@ public class ClientManager : BaseManager
             // count收数据的字节长度
             int count = clientSocket.EndReceive(ar);
             msg.ReadMessage(count, OnProcessMessage);
+            // 接收数据之后继续监听服务器端数据
+            Start();
         }
         catch (Exception e)
         {
@@ -67,7 +69,8 @@ public class ClientManager : BaseManager
     // 作为递归函数传递给ReadMessage
     private void OnProcessMessage(RequestCode requestCode, string data)
     {
-        // TODO 完善好RequestManager
+        // 通过中介者模式调用RequestManager的处理响应方法
+        facade.HandleResponse(requestCode, data);
     }
 
     // 发送请求 在一些request类中进行调用
@@ -78,7 +81,7 @@ public class ClientManager : BaseManager
         // 将数据发送到服务器端
         clientSocket.Send(bytes);
     }
-    
+
     // 游戏销毁时候，连接也进行销毁
     public override void OnDestroy()
     {
@@ -92,6 +95,4 @@ public class ClientManager : BaseManager
             Debug.LogWarning("无法关闭与服务器端的连接" + e);
         }
     }
-    
-    
 }
