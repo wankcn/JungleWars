@@ -105,7 +105,7 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
    让Message的方法在其他地方可以进行调用：为BasePanel提供可以访问到UIManager的成员uiMng，使每一个UI面板都可以访问到UIManager，UIManger管理所有面板，面板与面板之间不进行交互，减少耦合。
 
-
+5. 初始化DOTween插件并测试
 
 
 
