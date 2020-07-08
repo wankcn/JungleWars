@@ -95,4 +95,11 @@ public class GameFacade : MonoBehaviour
     {
         requestMng.HandleResponse(requestCode, data);
     }
+
+    // 提供方法使其他模块调用显示信息
+    public void ShowMessage(string msg)
+    {
+        // 通过UIManager来显示
+        uiMng.ShowMessage(msg);
+    }
 }

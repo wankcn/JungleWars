@@ -1,13 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasePanel : MonoBehaviour {
+public class BasePanel : MonoBehaviour
+{
+    // 提供可以访问到UIManager的成员
+    protected UIManager uiMng;
+    // 通过set方法进行赋值
+    public UIManager UIMng
+    {
+        set => uiMng = value;
+    }
+
     /// <summary>
     /// 界面被显示出来
     /// </summary>
     public virtual void OnEnter()
     {
-
     }
 
     /// <summary>
@@ -15,7 +23,6 @@ public class BasePanel : MonoBehaviour {
     /// </summary>
     public virtual void OnPause()
     {
-
     }
 
     /// <summary>
@@ -23,7 +30,6 @@ public class BasePanel : MonoBehaviour {
     /// </summary>
     public virtual void OnResume()
     {
-
     }
 
     /// <summary>
@@ -31,6 +37,5 @@ public class BasePanel : MonoBehaviour {
     /// </summary>
     public virtual void OnExit()
     {
-
     }
 }

@@ -41,7 +41,11 @@ public class UIManager : BaseManager
 
     private Dictionary<UIPanelType, string> panelPathDict; //存储所有面板Prefab的路径
     private Dictionary<UIPanelType, BasePanel> panelDict; //保存所有实例化面板的游戏物体身上的BasePanel组件
+
     private Stack<BasePanel> panelStack;
+
+    // 用来对MessagePanel进行引用
+    private MessagePanel msgPanel;
 
     public UIManager(GameFacade facade) : base(facade)
     {
@@ -111,6 +115,8 @@ public class UIManager : BaseManager
             string path = panelPathDict.TryGet(panelType);
             GameObject instPanel = GameObject.Instantiate(Resources.Load(path)) as GameObject;
             instPanel.transform.SetParent(CanvasTransform, false);
+            // 加载之后设置属性 得到身上的BasePanel组件设置UiMng 使每一个UI面板都可以访问到UIMng
+            instPanel.GetComponent<BasePanel>().UIMng = this;
             panelDict.Add(panelType, instPanel.GetComponent<BasePanel>());
             return instPanel.GetComponent<BasePanel>();
         }
@@ -141,13 +147,21 @@ public class UIManager : BaseManager
         }
     }
 
-    /// <summary>
-    /// just for test
-    /// </summary>
-    public void Test()
+    // 提供赋值的方法 MessagePanel被创建时候进行调用
+    public void InjectMsgPanel(MessagePanel msgPanel)
     {
-        string path;
-        panelPathDict.TryGetValue(UIPanelType.Knapsack, out path);
-        Debug.Log(path);
+        this.msgPanel = msgPanel;
+    }
+
+    // 显示信息 在别的面板想显示信息，直接通过UIManager里的ShowMessage方法即可
+    public void ShowMessage(string msg)
+    {
+        // 安全校验
+        if (msgPanel == null)
+        {
+            Debug.Log("无法显示提示信息，MsgPanel为空");
+            return;
+        }
+        msgPanel.ShowMessage(msg);
     }
 }
