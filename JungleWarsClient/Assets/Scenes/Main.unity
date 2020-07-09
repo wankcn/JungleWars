@@ -83025,6 +83025,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoginPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 1374732319030325973, guid: d391de0048e094528a0997f0eab7ba6e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1374732319030325974, guid: d391de0048e094528a0997f0eab7ba6e,
         type: 3}
       propertyPath: m_LocalPosition.x
