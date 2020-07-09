@@ -24541,6 +24541,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 807586594}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &811107658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 811107660}
+  - component: {fileID: 811107659}
+  m_Layer: 0
+  m_Name: GameFacade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &811107659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811107658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6b748b3a73e4cb2bb75ec34c7802d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &811107660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811107658}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &813630853
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83101,6 +83144,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RegisterPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 1774775170058915232, guid: 0ee2194149d1d4f49bfcacc18b4fb03e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1774775170058915235, guid: 0ee2194149d1d4f49bfcacc18b4fb03e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -83325,6 +83373,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MessagePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 4187411269258851947, guid: dcfbaf62fab524ef384477e3c691f3da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcfbaf62fab524ef384477e3c691f3da, type: 3}
 --- !u!1001 &6067017844272180940
@@ -83443,6 +83496,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StartPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067017843526218511, guid: fe364c66e6f264d8e8f865bd5738ebb8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe364c66e6f264d8e8f865bd5738ebb8, type: 3}

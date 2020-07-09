@@ -5,6 +5,16 @@ using System;
 
 public class UIManager : BaseManager
 {
+    // 重写OnInit加载默认场景
+    public override void OnInit()
+    {
+        base.OnInit();
+        PushPanel(UIPanelType.Message); // 消息
+        PushPanel(UIPanelType.Start); // 登录按钮
+        
+    }
+
+
     // /// 
     // /// 单例模式的核心
     // /// 1，定义一个静态的对象 在外界访问 在内部构造
