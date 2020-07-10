@@ -129,6 +129,10 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
    RequestCode里的User对应UserController
 
+4. 在客户端发送登录请求
+
+   服务器端创建登录请求对应的RequestCode和ActionCode，添加枚举类型
+
 
 
 
