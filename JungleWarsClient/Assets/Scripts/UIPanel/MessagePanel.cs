@@ -22,8 +22,8 @@ public class MessagePanel : BasePanel
     // 提供显示提示信息的方法
     public void ShowMessage(string msg)
     {
-        // 修改阿尔法 隐藏时Alpha改为了0，在显示之前要将阿尔法改为1
-        text.color = Color.white; // Alpha为1，信息才可以显示出来
+        // 修改阿尔法 隐藏时Alpha改为了0，在显示之前用0.2s将阿尔法改为1
+        text.CrossFadeAlpha(1, 0.2f, false);
         // 把要显示的信息设置到text上
         text.text = msg;
         text.enabled = true; // 显示
@@ -35,6 +35,6 @@ public class MessagePanel : BasePanel
     private void Hide()
     {
         // 0；1时间从1变化到0；不忽略时间的变化（无法监听回调方法）
-        text.CrossFadeAlpha(0, 1, false);
+        text.CrossFadeAlpha(0, 2, false);
     }
 }
