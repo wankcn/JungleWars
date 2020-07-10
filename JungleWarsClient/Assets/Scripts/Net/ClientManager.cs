@@ -56,7 +56,7 @@ public class ClientManager : BaseManager
         {
             // count收数据的字节长度
             int count = clientSocket.EndReceive(ar);
-            msg.ReadMessage(count, OnProcessMessage);
+            msg.ReadMessage(count, OnProcessDataCallBack);
             // 接收数据之后继续监听服务器端数据
             Start();
         }
@@ -67,10 +67,10 @@ public class ClientManager : BaseManager
     }
 
     // 作为递归函数传递给ReadMessage
-    private void OnProcessMessage(RequestCode requestCode, string data)
+    private void OnProcessDataCallBack(ActionCode actionCode, string data)
     {
         // 通过中介者模式调用RequestManager的处理响应方法
-        facade.HandleResponse(requestCode, data);
+        facade.HandleResponse(actionCode, data);
     }
 
     // 发送请求 在一些request类中进行调用

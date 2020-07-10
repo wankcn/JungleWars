@@ -79,21 +79,21 @@ public class GameFacade : MonoBehaviour
     }
 
     // 提供addRequest方法方便BaseRequest调用 降低耦合性
-    public void AddRequest(RequestCode requestCode, BaseRequest request)
+    public void AddRequest(ActionCode actionCode, BaseRequest request)
     {
-        requestMng.AddRequest(requestCode, request);
+        requestMng.AddRequest(actionCode, request);
     }
 
     // 销毁请求
-    public void RemoveRequest(RequestCode requestCode)
+    public void RemoveRequest(ActionCode actionCode)
     {
-        requestMng.RemoveRequest(requestCode);
+        requestMng.RemoveRequest(actionCode);
     }
 
     // clientmanager 进行响应的处理 中转
-    public void HandleResponse(RequestCode requestCode, string data)
+    public void HandleResponse(ActionCode actionCode, string data)
     {
-        requestMng.HandleResponse(requestCode, data);
+        requestMng.HandleResponse(actionCode, data);
     }
 
     // 提供方法使其他模块调用显示信息

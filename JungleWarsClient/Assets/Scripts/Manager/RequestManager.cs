@@ -14,28 +14,28 @@ public class RequestManager : BaseManager
 
     // 声明字典来存储所有Request对象
     // 通过RequsetCode找到对应的Request对象来发起请求
-    private Dictionary<RequestCode, BaseRequest> requestDict = new Dictionary<RequestCode, BaseRequest>();
+    private Dictionary<ActionCode, BaseRequest> requestDict = new Dictionary<ActionCode, BaseRequest>();
 
     // 添加请求 请求对象
-    public void AddRequest(RequestCode requestCode, BaseRequest request)
+    public void AddRequest(ActionCode actionCode, BaseRequest request)
     {
-        requestDict.Add(requestCode, request);
+        requestDict.Add(actionCode, request);
     }
 
     // 当场景中某个物体销毁，字典里的request需要进行移除
-    public void RemoveRequest(RequestCode requestCode)
+    public void RemoveRequest(ActionCode actionCode)
     {
-        requestDict.Remove(requestCode);
+        requestDict.Remove(actionCode);
     }
 
     // 用来进行响应的处理 string 服务器发送来的数据 
-    public void HandleResponse(RequestCode requestCode, string data)
+    public void HandleResponse(ActionCode actionCode, string data)
     {
         // 根据requestCode在字典中查找到BaseRequest 通过Request里的OnReponse进行处理数据
-        BaseRequest request = requestDict.TryGet<RequestCode, BaseRequest>(requestCode);
+        BaseRequest request = requestDict.TryGet<ActionCode, BaseRequest>(actionCode);
         if (request == null)
         {
-            Debug.LogWarning("无法得到RequestCode[" + requestCode + "]对应的Request类");
+            Debug.LogWarning("无法得到ActionCode[" + actionCode + "]对应的Request类");
         }
 
         request.OnResponse(data);

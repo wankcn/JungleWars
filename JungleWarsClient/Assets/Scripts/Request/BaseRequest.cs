@@ -1,6 +1,7 @@
 ﻿// 用来发起请求 很多请求需要访问游戏物体，挂在场景中时会更加方便
 // 客户端的每一个Request都可以挂在游戏物体身上: MonoBehaviour
 // 当BaseRequest组件被实例化时，要将组件交给requestManager进行管理
+// 通过ActionCode区分Request
 
 using System;
 using System.Collections;
@@ -10,13 +11,14 @@ using UnityEngine;
 
 public class BaseRequest : MonoBehaviour
 {
-    private RequestCode requestCode = RequestCode.None; // 默认无请求
+    protected RequestCode requestCode = RequestCode.None; // 默认无请求
+    protected ActionCode actionCode = ActionCode.None; // 默认无请求 需要在子类进行赋值
 
     // 可能在子类中进行重写 重写时需要调用一下父类的Awake，有可能在Base中做初始化工作
     public virtual void Awake()
     {
         // 把自身添加到RequestManager的字典里进行管理
-        GameFacade.Instance.AddRequest(requestCode, this);
+        GameFacade.Instance.AddRequest(actionCode, this);
     }
 
     // 发起请求
@@ -33,6 +35,6 @@ public class BaseRequest : MonoBehaviour
     public virtual void OnDestroy()
     {
         // 调用GameFacade将自身移除
-        GameFacade.Instance.RemoveRequest(requestCode);
+        GameFacade.Instance.RemoveRequest(actionCode);
     }
 }
