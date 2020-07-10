@@ -123,6 +123,12 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 1. 处理客户端LoginPanel登录按钮点击（根据输入错误的用户名和密码反馈不同信息）
 
+2. 修改客户端代码（与解析处理相关的所有RequestCode都改成ActionCode，使一个ActionCode对应一个Request类）
+
+3. 创建LoginRequest类和RegisterRequest类，分别对应ActionCode中的Login和Register
+
+   RequestCode里的User对应UserController
+
 
 
 

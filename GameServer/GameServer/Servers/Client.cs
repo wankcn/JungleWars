@@ -84,9 +84,9 @@ namespace GameServer.Servers
         }
 
         // 进行响应 数据包装发送
-        public void Send(RequestCode requestCode, string data)
+        public void Send(ActionCode actionCode, string data)
         {
-            byte[] bytes = Message.PackData(requestCode, data);
+            byte[] bytes = Message.PackData(actionCode, data);
             clientSocket.Send(bytes);
         }
     }

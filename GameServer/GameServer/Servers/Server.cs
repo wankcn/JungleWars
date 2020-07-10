@@ -71,9 +71,9 @@ namespace GameServer.Servers
         // 给client客户端发起响应
         // 客户端，响应的RequestCode 响应的字符串数据
         // controller处理完请求之后会调用SendResponse
-        public void SendResponse(Client client, RequestCode requestCode, string data)
+        public void SendResponse(Client client, ActionCode actionCode, string data)
         {
-            client.Send(requestCode, data);
+            client.Send(actionCode, data);
         }
 
         // 用来处理消息的方法

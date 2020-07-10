@@ -76,7 +76,7 @@ namespace GameServer.Controller
             }
 
             // server向客户端发起响应 o转字符串 还要进行byte打包
-            server.SendResponse(client, requestCode, o as string);
+            server.SendResponse(client, actionCode, o as string);
         }
     }
 }
