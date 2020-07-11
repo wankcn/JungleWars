@@ -823,6 +823,7 @@ GameObject:
   - component: {fileID: 1774775170058915237}
   - component: {fileID: 1774775170058915234}
   - component: {fileID: 1774775170058915236}
+  - component: {fileID: 7742467275747909044}
   m_Layer: 5
   m_Name: RegisterPanel
   m_TagString: Untagged
@@ -901,6 +902,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f00293c7581f44ccfab36afa42565ff8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7742467275747909044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774775170058915232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08fc71f2d7ef5494787970de04a5a8c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1774775170097361592

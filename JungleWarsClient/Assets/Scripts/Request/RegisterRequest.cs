@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Common;
 using UnityEngine;
 
-public class LoginRequest : BaseRequest
+public class RegisterRequest : BaseRequest
 {
-    private LoginPanel loginPanel;
+    private RegisterPanel registerPanel;
 
-    // 重写父类Awake
     public override void Awake()
     {
         // 初始化在Base.Awake()之前
         requestCode = RequestCode.User;
-        actionCode = ActionCode.Login;
-        loginPanel = GetComponent<LoginPanel>();
+        actionCode = ActionCode.Register;
+        registerPanel = GetComponent<RegisterPanel>();
         base.Awake();
     }
-
-    // 发起登录请求 重写方法 数据的组拼
+    
+    // 发起注册请求 数据的组拼
     public void SendRequest(string username, string password)
     {
         string data = username + "," + password;
@@ -30,8 +28,6 @@ public class LoginRequest : BaseRequest
     {
         // data先转int，然后整体强制转换枚举类型
         ReturnCode returnCode = (ReturnCode) int.Parse(data);
-
-        // 通过LoginPanel调用响应方法
-        loginPanel.OnLoginResponse(returnCode);
+        
     }
 }

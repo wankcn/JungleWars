@@ -11,9 +11,12 @@ public class RegisterPanel : BasePanel
     private InputField usernameIF;
     private InputField passwordIF;
     private InputField rePasswordIF;
+    private RegisterRequest registerRequest;
 
     private void Start()
     {
+        registerRequest = GetComponent<RegisterRequest>();
+
         usernameIF = transform.Find("UsernameLabel/UsernameInput").GetComponent<InputField>();
         passwordIF = transform.Find("PasswordLabel/PasswordInput").GetComponent<InputField>();
         rePasswordIF = transform.Find("RePasswordLabel/RePasswordInput").GetComponent<InputField>();
@@ -57,7 +60,7 @@ public class RegisterPanel : BasePanel
 
         // 发送到服务端进行注册
         // !usernameIsEmpty && !passwordIsEmpty && !rePasswordIsEmpty && passwordIF.text == rePasswordIF.text
-        
+        registerRequest.SendRequest(usernameIF.text, passwordIF.text);
     }
 
     private void OnCloseClick()
