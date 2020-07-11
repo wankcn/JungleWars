@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Common;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +37,7 @@ public class RegisterPanel : BasePanel
         transform.DOLocalMove(Vector3.zero, 0.3f);
     }
 
+    // 点击注册事件
     private void OnRegisterClick()
     {
         bool usernameIsEmpty = string.IsNullOrEmpty(usernameIF.text);
@@ -48,21 +50,37 @@ public class RegisterPanel : BasePanel
             uiMng.ShowMessage("用户名不能为空");
         }
 
-        if (passwordIsEmpty)
+        else if (passwordIsEmpty)
         {
             uiMng.ShowMessage("密码不能为空");
         }
 
-        if (passwordIF.text != rePasswordIF.text)
+        else if (passwordIF.text != rePasswordIF.text)
         {
             uiMng.ShowMessage("密码不一致");
         }
-
-        // 发送到服务端进行注册
-        // !usernameIsEmpty && !passwordIsEmpty && !rePasswordIsEmpty && passwordIF.text == rePasswordIF.text
-        registerRequest.SendRequest(usernameIF.text, passwordIF.text);
+        else
+        {
+            // 发送到服务端进行注册
+            // !usernameIsEmpty && !passwordIsEmpty && !rePasswordIsEmpty && passwordIF.text == rePasswordIF.text
+            registerRequest.SendRequest(usernameIF.text, passwordIF.text);
+        }
     }
 
+    // 解析服务器端响应的状态码
+    public void OnRegisterResponse(ReturnCode returnCode)
+    {
+        if (returnCode == ReturnCode.Success)
+        {
+            uiMng.ShowMessageSync("注册成功！");
+        }
+        else
+        {
+            uiMng.ShowMessageSync("用户名已存在");
+        }
+    }
+
+    // 点击关闭按钮
     private void OnCloseClick()
     {
         // 移除时与进入动画相反
