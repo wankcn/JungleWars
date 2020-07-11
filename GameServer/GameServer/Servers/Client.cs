@@ -31,6 +31,8 @@ namespace GameServer.Servers
             mysqlConn = ConnHelper.Connect(); // 创建client时就建立连接
         }
 
+        public MySqlConnection MySqlConn => mysqlConn; // get方法
+
         // start listen
         public void Start()
         {
