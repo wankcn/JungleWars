@@ -4,6 +4,6 @@ namespace GameServer.Controller
 {
     public class DefaultController:BaseController
     {
-        // 不需要设置RequestCode 按照默认值None
+        // 不需要设置RequestCode 按照默认值None 
     }
 }

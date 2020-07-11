@@ -36,6 +36,7 @@ namespace GameServer.Controller
         {
             DefaultController defaultController = new DefaultController();
             controllerDict.Add(defaultController.RequestCode, defaultController);
+            controllerDict.Add(RequestCode.User,new UserController());
         }
 
         // 服务端返回给客户端的数据需要处理

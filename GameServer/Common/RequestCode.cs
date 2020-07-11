@@ -5,7 +5,7 @@ namespace Common
     public enum RequestCode
     {
         None,
-        User,
+        User, // 登录请求
         Room,
         Game
     }

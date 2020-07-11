@@ -4,6 +4,7 @@ namespace Common
     {
         // 枚举类型是值类型 每一个值代表一个数字
         None,
+        // 登录请求
         Login,
         Register,
         ListRoom,
