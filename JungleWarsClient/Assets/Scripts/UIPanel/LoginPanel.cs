@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Common;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -11,10 +12,9 @@ public class LoginPanel : BasePanel
 
     // 面板内容相关 在OnEnter进行获取
     private InputField usernameIF;
-
     private InputField passwordIF;
-    // private Button loginButton;
-    // private Button registerButton;
+
+    private LoginRequest loginRequest;
 
     public override void OnEnter()
     {
@@ -27,6 +27,8 @@ public class LoginPanel : BasePanel
         // 面板从外面进来 局部位置 结束位置屏幕正中间
         transform.localPosition = new Vector3(1000, 0, 0);
         transform.DOLocalMove(Vector3.zero, 0.3f);
+
+        loginRequest = GetComponent<LoginRequest>();
 
         usernameIF = transform.Find("UsernameLabel/UsernameInput").GetComponent<InputField>();
         passwordIF = transform.Find("PasswordLabel/PasswordInput").GetComponent<InputField>();
@@ -64,15 +66,30 @@ public class LoginPanel : BasePanel
 
         if (passwordIsEmpty)
         {
-            uiMng.ShowMessage("密码不能为空") ;
+            uiMng.ShowMessage("密码不能为空");
         }
 
         if (usernameIsEmpty && passwordIsEmpty)
         {
             uiMng.ShowMessage("用户名和密码不能为空");
         }
-        
-        // TODO 发送到服务器端处理
+
+        // 发送到服务器端处理
+        loginRequest.SendRequest(usernameIF.text, passwordIF.text);
+    }
+
+    //
+    public void OnLoginResponse(ReturnCode returnCode)
+    {
+        // 登录成功
+        if (returnCode == ReturnCode.Success)
+        {
+            // TODO
+        }
+        else
+        {
+            uiMng.ShowMessage("用户名或密码错误，无法登录，请重新输入！");
+        }
     }
 
     // 注册按钮点击事件

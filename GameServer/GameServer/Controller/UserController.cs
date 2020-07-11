@@ -30,10 +30,8 @@ namespace GameServer.Controller
                 // 返回失败给客户端 0的字符串
                 return ((int) ReturnCode.Fail).ToString();
             }
-            else
-            {
-                return ((int) ReturnCode.Success).ToString();
-            }
+
+            return ((int) ReturnCode.Success).ToString();
         }
     }
 }

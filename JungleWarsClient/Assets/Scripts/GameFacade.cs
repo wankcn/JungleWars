@@ -102,4 +102,10 @@ public class GameFacade : MonoBehaviour
         // 通过UIManager来显示
         uiMng.ShowMessage(msg);
     }
+
+    // 发送请求
+    public void SendRequest(RequestCode requestCode, ActionCode actionCode, string data)
+    {
+        clientMng.SendRequest(requestCode, actionCode, data);
+    }
 }

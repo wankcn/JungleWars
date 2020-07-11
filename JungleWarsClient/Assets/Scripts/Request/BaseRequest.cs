@@ -13,12 +13,25 @@ public class BaseRequest : MonoBehaviour
 {
     protected RequestCode requestCode = RequestCode.None; // 默认无请求
     protected ActionCode actionCode = ActionCode.None; // 默认无请求 需要在子类进行赋值
+    protected GameFacade facade;
+
+    // public void SetFacade(GameFacade facade)
+    // {
+    //     this.facade = facade;
+    // }
 
     // 可能在子类中进行重写 重写时需要调用一下父类的Awake，有可能在Base中做初始化工作
     public virtual void Awake()
     {
         // 把自身添加到RequestManager的字典里进行管理
         GameFacade.Instance.AddRequest(actionCode, this);
+        // 减少单例模式使用次数 减少程序耦合性
+        facade = GameFacade.Instance;
+    }
+
+    protected void SendRequest(string data)
+    {
+        facade.SendRequest(requestCode, actionCode, data);
     }
 
     // 发起请求
