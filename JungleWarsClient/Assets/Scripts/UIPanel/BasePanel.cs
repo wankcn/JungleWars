@@ -3,12 +3,26 @@ using System.Collections;
 
 public class BasePanel : MonoBehaviour
 {
+    private GameFacade facade;
+
     // 提供可以访问到UIManager的成员
     protected UIManager uiMng;
+
     // 通过set方法进行赋值
     public UIManager UIMng
     {
         set => uiMng = value;
+    }
+
+    public GameFacade Facade
+    {
+        set => facade = value;
+    }
+
+    // 播放点击的声音（点击声一样，放在基类）
+    protected void PlayClikSound()
+    {
+        facade.PlayNormalSound(AudioManager.Sound_ButtonClick);
     }
 
     /// <summary>

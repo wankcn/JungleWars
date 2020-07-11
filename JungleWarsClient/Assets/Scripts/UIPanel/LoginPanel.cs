@@ -44,6 +44,7 @@ public class LoginPanel : BasePanel
     // 处理close按钮的点击
     private void OnCloseClick()
     {
+        PlayClikSound(); // 播放点击声音
         // 移除时与进入动画相反
         transform.DOScale(0, 0.3f);
         // 移出到目标位置new Vector3(1000, 0, 0)
@@ -55,6 +56,7 @@ public class LoginPanel : BasePanel
     // 登录按钮点击事件
     private void OnLoginClick()
     {
+        PlayClikSound(); // 播放点击声音
         // 登录时先验证用户名和密码是否为空
         // IsNullOrEmpty 空串或者空对象都会返回true
         bool usernameIsEmpty = string.IsNullOrEmpty(usernameIF.text);
@@ -95,6 +97,7 @@ public class LoginPanel : BasePanel
     // 注册按钮点击事件
     private void OnRegisterClick()
     {
+        PlayClikSound(); // 播放点击声音
         // 弹出注册面板
         uiMng.PushPanel(UIPanelType.Register);
     }

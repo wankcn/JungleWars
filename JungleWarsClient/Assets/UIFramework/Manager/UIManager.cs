@@ -11,7 +11,6 @@ public class UIManager : BaseManager
         base.OnInit();
         PushPanel(UIPanelType.Message); // 消息
         PushPanel(UIPanelType.Start); // 登录按钮
-        
     }
 
 
@@ -127,6 +126,7 @@ public class UIManager : BaseManager
             instPanel.transform.SetParent(CanvasTransform, false);
             // 加载之后设置属性 得到身上的BasePanel组件设置UiMng 使每一个UI面板都可以访问到UIMng
             instPanel.GetComponent<BasePanel>().UIMng = this;
+            instPanel.GetComponent<BasePanel>().Facade = facade;
             panelDict.Add(panelType, instPanel.GetComponent<BasePanel>());
             return instPanel.GetComponent<BasePanel>();
         }
@@ -172,6 +172,7 @@ public class UIManager : BaseManager
             Debug.Log("无法显示提示信息，MsgPanel为空");
             return;
         }
+
         msgPanel.ShowMessage(msg);
     }
 
@@ -182,6 +183,7 @@ public class UIManager : BaseManager
             Debug.Log("无法显示提示信息，MsgPanel为空");
             return;
         }
-        msgPanel.ShowMessageSync(msg); 
+
+        msgPanel.ShowMessageSync(msg);
     }
 }

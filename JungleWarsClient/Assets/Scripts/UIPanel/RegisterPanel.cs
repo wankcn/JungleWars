@@ -40,6 +40,7 @@ public class RegisterPanel : BasePanel
     // 点击注册事件
     private void OnRegisterClick()
     {
+        PlayClikSound(); // 播放点击声音
         bool usernameIsEmpty = string.IsNullOrEmpty(usernameIF.text);
         bool passwordIsEmpty = string.IsNullOrEmpty(passwordIF.text);
         bool rePasswordIsEmpty = string.IsNullOrEmpty(rePasswordIF.text);
@@ -83,6 +84,7 @@ public class RegisterPanel : BasePanel
     // 点击关闭按钮
     private void OnCloseClick()
     {
+        PlayClikSound(); // 播放点击声音
         // 移除时与进入动画相反
         transform.DOScale(0, 0.3f);
         // 移出到目标位置new Vector3(1000, 0, 0)

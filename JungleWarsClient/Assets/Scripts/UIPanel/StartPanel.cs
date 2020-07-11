@@ -22,6 +22,7 @@ public class StartPanel : BasePanel
     // 得到按钮并监听按钮的点击
     private void OnLoginClik()
     {
+        PlayClikSound(); // 播放点击声音
         // 点击时加载登录面板
         uiMng.PushPanel(UIPanelType.Login);
     }

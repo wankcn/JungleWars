@@ -108,4 +108,16 @@ public class GameFacade : MonoBehaviour
     {
         clientMng.SendRequest(requestCode, actionCode, data);
     }
+    
+    // 用于外界切换背景音乐
+    public void PlayBgSound(string soundName)
+    {
+        audioMng.PlayBgSound(soundName);
+    }
+    
+    // 用于外界添加声音
+    public void PlayNormalSound(string soundName)
+    {
+        audioMng.PlayNormalSound(soundName);
+    } 
 }
