@@ -131,7 +131,11 @@ Unity3D开发网络游戏，完成后作为明年毕业设计之一
 
 4. 在客户端发送登录请求
 
-   服务器端创建登录请求对应的RequestCode和ActionCode，添加枚举类型
+   服务器端创建登录请求对应的RequestCode和ActionCode，添加枚举类型，并在LoginPanel的OnLoginClick()增加发送客户端登录信息
+
+5. 创建UserController，完成DAO层与Model层的创建，完成登录信息数据库校验方法
+
+6. 
 
 
 
