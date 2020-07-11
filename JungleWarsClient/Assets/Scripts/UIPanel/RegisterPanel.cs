@@ -35,6 +35,29 @@ public class RegisterPanel : BasePanel
 
     private void OnRegisterClick()
     {
+        bool usernameIsEmpty = string.IsNullOrEmpty(usernameIF.text);
+        bool passwordIsEmpty = string.IsNullOrEmpty(passwordIF.text);
+        bool rePasswordIsEmpty = string.IsNullOrEmpty(rePasswordIF.text);
+        // 首先用户名与密码不能为空
+        string msg = "";
+        if (usernameIsEmpty)
+        {
+            uiMng.ShowMessage("用户名不能为空");
+        }
+
+        if (passwordIsEmpty)
+        {
+            uiMng.ShowMessage("密码不能为空");
+        }
+
+        if (passwordIF.text != rePasswordIF.text)
+        {
+            uiMng.ShowMessage("密码不一致");
+        }
+
+        // 发送到服务端进行注册
+        // !usernameIsEmpty && !passwordIsEmpty && !rePasswordIsEmpty && passwordIF.text == rePasswordIF.text
+        
     }
 
     private void OnCloseClick()
