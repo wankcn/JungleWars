@@ -20,8 +20,8 @@ namespace GameServer.Controller
         public string Login(string data, Client client, Server server)
         {
             // 把Data进行分割得到用户名和密码 用户名0，密码1
-            string[] strs = data.Split(',');
-            User user = userDAO.VerifyUser(client.MySqlConn, strs[0], strs[1]);
+            string[] str = data.Split(',');
+            User user = userDAO.VerifyUser(client.MySqlConn, str[0], str[1]);
             // user为空验证失败
             if (user == null)
             {
@@ -31,6 +31,20 @@ namespace GameServer.Controller
                 return ((int) ReturnCode.Fail).ToString();
             }
 
+            return ((int) ReturnCode.Success).ToString();
+        }
+
+        // 用来处理注册请求 存在注册失败，不存在注册成功
+        public string Register(string data, Client client, Server server)
+        {
+            string[] str = data.Split(',');
+            string username = str[0];
+            string password = str[1];
+            bool tmp = userDAO.GetUserByUsername(client.MySqlConn, username);
+            if (tmp)
+                return ((int) ReturnCode.Fail).ToString();
+            // 不重复数据库添加注册信息
+            userDAO.AddUser(client.MySqlConn, username, password);
             return ((int) ReturnCode.Success).ToString();
         }
     }

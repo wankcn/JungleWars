@@ -37,7 +37,7 @@ namespace GameServer.DAO
             }
             catch (Exception e)
             {
-                Console.WriteLine("验证信息是异常" + e);
+                Console.WriteLine("验证信息时异常" + e);
             }
             finally
             {
@@ -48,6 +48,52 @@ namespace GameServer.DAO
             }
 
             return null;
+        }
+
+        // 根据用户名进行查找
+        public bool GetUserByUsername(MySqlConnection conn, string username)
+        {
+            MySqlDataReader reader = null;
+            try
+            {
+                string sql = "select * from user where username=@username ";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("username", username);
+                reader = cmd.ExecuteReader();
+                // 判断是否有数据
+                if (reader.HasRows)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("查找用户时异常" + e);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+            }
+
+            return false;
+        }
+
+        // 添加数据
+        public void AddUser(MySqlConnection conn, string username, string password)
+        {
+            try
+            {
+                string sql = "insert into user set username=@username,password =@password ";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("username", username);
+                cmd.Parameters.AddWithValue("password", password);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("在添加用户信息时出现异常" + e);
+            }
         }
     }
 }
