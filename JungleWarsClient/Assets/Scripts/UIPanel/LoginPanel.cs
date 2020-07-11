@@ -88,7 +88,7 @@ public class LoginPanel : BasePanel
         }
         else
         {
-            uiMng.ShowMessage("用户名或密码错误，无法登录，请重新输入！");
+            uiMng.ShowMessageSync("用户名或密码错误，无法登录，请重新输入！");
         }
     }
 

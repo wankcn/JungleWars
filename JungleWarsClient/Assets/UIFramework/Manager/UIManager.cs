@@ -174,4 +174,14 @@ public class UIManager : BaseManager
         }
         msgPanel.ShowMessage(msg);
     }
+
+    public void ShowMessageSync(string msg)
+    {
+        if (msgPanel == null)
+        {
+            Debug.Log("无法显示提示信息，MsgPanel为空");
+            return;
+        }
+        msgPanel.ShowMessageSync(msg); 
+    }
 }

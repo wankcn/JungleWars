@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,17 @@ public class MessagePanel : BasePanel
     // 得到自身的text组件
     private Text text;
     private float showTime = 1; // 控制提示信息显示1s后隐藏
+    private string message = null;
+
+    // 重写 在其中进行控制消息异步
+    private void Update()
+    {
+        if (message != null)
+        {
+            ShowMessage(message);
+            message = null;
+        }
+    }
 
     // 重写OnEnter 面板被实例化时候会调用OnEnter
     public override void OnEnter()
@@ -17,6 +29,12 @@ public class MessagePanel : BasePanel
         // 默认不显示信息
         text.enabled = false;
         uiMng.InjectMsgPanel(this);
+    }
+
+    // 再提供一个间接显示的方法处理主线程调用ShowMessage
+    public void ShowMessageSync(string msg)
+    {
+        message = msg;
     }
 
     // 提供显示提示信息的方法
