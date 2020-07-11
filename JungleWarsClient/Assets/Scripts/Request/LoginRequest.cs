@@ -8,11 +8,19 @@ public class LoginRequest : BaseRequest
 {
     private LoginPanel loginPanel;
 
-    private void Start()
+    // 重写父类Awake
+    public override void Awake()
     {
+        // 初始化在Base.Awake()之前
         requestCode = RequestCode.User;
         actionCode = ActionCode.Login;
         loginPanel = GetComponent<LoginPanel>();
+        base.Awake();
+    }
+
+    private void Start()
+    {
+        
     }
 
     // 发起登录请求 重写方法 数据的组拼

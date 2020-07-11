@@ -16,7 +16,7 @@ namespace GameServer.Servers
         private Socket serverSocket;
 
         // 管理所有客户端
-        private List<Client> clientList;
+        private List<Client> clientList = new List<Client>();
 
         // 不需要初始化参数，直接new构造
         private ControllerManager controllerManager;

@@ -36,6 +36,7 @@ public class RequestManager : BaseManager
         if (request == null)
         {
             Debug.LogWarning("无法得到ActionCode[" + actionCode + "]对应的Request类");
+            return;
         }
 
         request.OnResponse(data);
