@@ -95,9 +95,11 @@ public class LoginPanel : BasePanel
     // 注册按钮点击事件
     private void OnRegisterClick()
     {
+        // 弹出注册面板
+        uiMng.PushPanel(UIPanelType.Register);
     }
 
-    // 禁用
+    // 禁用 
     public override void OnExit()
     {
         base.OnExit();
