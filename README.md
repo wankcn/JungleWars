@@ -165,9 +165,15 @@ Unity3D开发网络游戏
 
    设计房间条目 取消Chilld Force Expand的Heigh取消勾选从上往下排列
 
-   增加mask和image设置与背景色相同，隐藏超出布局的面板
+   为ScrollRect增加mask和image设置与背景色相同，隐藏超出布局的面板
 
 3. 开发房间列表的滚动条和按钮
+
+
+
+#### 7月16日
+
+1. 控制房间列表的显示
 
  
 
