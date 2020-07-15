@@ -18,6 +18,10 @@ public class BaseManager
     {
     }
 
+    public virtual void Update()
+    {
+    }
+
     // OnDestroy() 当场景切换的时候或退出游戏的时候，各个模块可能需要做清理工作 生命的结束
     public virtual void OnDestroy()
     {

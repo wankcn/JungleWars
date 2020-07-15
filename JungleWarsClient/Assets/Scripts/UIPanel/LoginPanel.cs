@@ -78,6 +78,7 @@ public class LoginPanel : BasePanel
 
         // 发送到服务器端处理
         loginRequest.SendRequest(usernameIF.text, passwordIF.text);
+        uiMng.ShowMessage("登录成功");
     }
 
     //
@@ -87,6 +88,7 @@ public class LoginPanel : BasePanel
         if (returnCode == ReturnCode.Success)
         {
             // TODO
+            uiMng.PushPanelSync(UIPanelType.RoomList);
         }
         else
         {

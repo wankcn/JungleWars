@@ -54,6 +54,9 @@ public class ClientManager : BaseManager
         // count表示接收到多少字节的数据
         try
         {
+            // 接收之前判断释放 等于空或者没有与服务器连接的时候
+            if (clientSocket == null || clientSocket.Connected == false)
+                return;
             // count收数据的字节长度
             int count = clientSocket.EndReceive(ar);
             msg.ReadMessage(count, OnProcessDataCallBack);

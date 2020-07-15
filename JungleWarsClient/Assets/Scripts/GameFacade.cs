@@ -37,10 +37,18 @@ public class GameFacade : MonoBehaviour
     {
         // 对manager进行初始化
         InitManager();
+        
     }
 
     void Update()
     {
+        UpdateManager();
+    }
+
+    // 游戏销毁时候进行监听
+    private void OnDestroy()
+    {
+        DestroyManager();
     }
 
     // Manger构造与初始化
@@ -72,10 +80,15 @@ public class GameFacade : MonoBehaviour
         clientMng.OnDestroy();
     }
 
-    // 游戏销毁时候进行监听
-    private void OnDestroy()
+    // 更新
+    private void UpdateManager()
     {
-        DestroyManager();
+        uiMng.Update();
+        audioMng.Update();
+        playerMng.Update();
+        cameraMng.Update();
+        requestMng.Update();
+        clientMng.Update();
     }
 
     // 提供addRequest方法方便BaseRequest调用 降低耦合性
@@ -108,16 +121,16 @@ public class GameFacade : MonoBehaviour
     {
         clientMng.SendRequest(requestCode, actionCode, data);
     }
-    
+
     // 用于外界切换背景音乐
     public void PlayBgSound(string soundName)
     {
         audioMng.PlayBgSound(soundName);
     }
-    
+
     // 用于外界添加声音
     public void PlayNormalSound(string soundName)
     {
         audioMng.PlayNormalSound(soundName);
-    } 
+    }
 }

@@ -5,15 +5,6 @@ using System;
 
 public class UIManager : BaseManager
 {
-    // 重写OnInit加载默认场景
-    public override void OnInit()
-    {
-        base.OnInit();
-        PushPanel(UIPanelType.Message); // 消息
-        PushPanel(UIPanelType.Start); // 登录按钮
-    }
-
-
     // /// 
     // /// 单例模式的核心
     // /// 1，定义一个静态的对象 在外界访问 在内部构造
@@ -50,15 +41,37 @@ public class UIManager : BaseManager
 
     private Dictionary<UIPanelType, string> panelPathDict; //存储所有面板Prefab的路径
     private Dictionary<UIPanelType, BasePanel> panelDict; //保存所有实例化面板的游戏物体身上的BasePanel组件
-
     private Stack<BasePanel> panelStack;
-
-    // 用来对MessagePanel进行引用
-    private MessagePanel msgPanel;
+    private MessagePanel msgPanel; // 用来对MessagePanel进行引用
+    private UIPanelType panelTypeToPush = UIPanelType.None;
 
     public UIManager(GameFacade facade) : base(facade)
     {
         ParseUIPanelTypeJson();
+    }
+
+    // 重写OnInit加载默认场景
+    public override void OnInit()
+    {
+        base.OnInit();
+        PushPanel(UIPanelType.Message); // 消息
+        PushPanel(UIPanelType.Start); // 登录按钮
+    }
+
+    public override void Update()
+    {
+        // 当不等于None时是需要加载的
+        if (panelTypeToPush != UIPanelType.None)
+        {
+            PushPanel(panelTypeToPush);
+            panelTypeToPush = UIPanelType.None;
+        }
+    }
+
+
+    public void PushPanelSync(UIPanelType panelType)
+    {
+        panelTypeToPush = panelType;
     }
 
     /// <summary>

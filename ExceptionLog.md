@@ -30,4 +30,4 @@ public void OnLoginResponse(ReturnCode returnCode)
     }
 ```
 
-这里的OnLoginResponse()是在回调，不是在主线程里执行。不管是访问UI的属性，或者通过GameObject实例化某个物体，都只能在主线程里进行。OnLoginResponse是在异步线程里，通过异步的方式push面板
+这里的OnLoginResponse()是在回调，不是在主线程里执行。不管是访问UI的属性，或者通过GameObject实例化某个物体，都只能在主线程里进行。OnLoginResponse是在异步线程里，通过异步的方式push面板。

@@ -56,6 +56,7 @@ namespace GameServer.Servers
             Client client = new Client(clientSocket, this);
             client.Start();
             clientList.Add(client);
+            serverSocket.BeginAccept(AcceptCallBack, null);
         }
 
         // 移除client的方法，如果断开连接移除

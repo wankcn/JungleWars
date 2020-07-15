@@ -36,6 +36,9 @@ namespace GameServer.Servers
         // start listen
         public void Start()
         {
+            // 接收之前判断释放 等于空或者没有与服务器连接的时候 不再进行接收
+            if (clientSocket == null || clientSocket.Connected == false)
+                return;
             // buffer offset size 异步接收
             clientSocket.BeginReceive(msg.Data, msg.StartIndex, msg.RemainSize,
                 SocketFlags.None, ReceiveCallBack, null);
