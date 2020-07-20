@@ -48,3 +48,50 @@ if (clientSocket == null || clientSocket.Connected == false)
 
 
 
+## 登录
+
+### 无法正常显示登录面板
+
+登录面板登录成功显示房间列表，关闭房间列表显示登录面板，重复操作两次后，不会弹出登录面板，而是弹出登录按钮。
+
+在RoomListPanel中，每次进行Push时都会进行OnEnter，显示了两次，OnCloseClick方法就会注册两次，也就是每次点击OnClick，OnCloseClick方法会执行两遍。
+
+```c#
+public override void OnEnter()
+{
+    battleRes = transform.Find("BattleRes").GetComponent<RectTransform>();
+    roomList = transform.Find("RoomList").GetComponent<RectTransform>();
+    transform.Find("RoomList/CloseButton").GetComponent<Button>().onClick.AddListener(OnCloseClick);
+    EnterAnim();
+}
+```
+
+```c#
+private void OnCloseClick()
+{
+    PlayClikSound();
+    // 将自身弹出去
+    uiMng.PopPanel();
+}
+```
+
+执行两遍的时候先把房间列表面板pop出去，接着也将登录面板pop出去。不应该执行两次，将Start方法进行重写。把OnClick事件放在Start方法里面，保证代码只执行一次。
+
+
+
+## NullReferenceException
+
+### Object reference not set to an instance of an object
+
+OnEnter在Start之前执行，对初始化进行判断，初始化完成时再调用显示面板。
+
+```c#
+public override void OnEnter()
+{
+    // 初始化完成之后才会调用
+    if (battleRes != null)
+    {
+        EnterAnim();
+    }
+}
+```
