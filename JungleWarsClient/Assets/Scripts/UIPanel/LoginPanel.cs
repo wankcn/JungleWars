@@ -41,6 +41,16 @@ public class LoginPanel : BasePanel
         transform.Find("RegisterButton").GetComponent<Button>().onClick.AddListener(OnRegisterClick);
     }
 
+    // 当界面暂停 新界面push到界面上面的时候调用
+    public override void OnPause()
+    {
+        transform.DOScale(0, 0.3f);
+        // 移出到目标位置new Vector3(1000, 0, 0) 将自身移除
+        Tweener tweener = transform.DOLocalMove(new Vector3(1000, 0, 0), 0.3f);
+        // 注册回调 播放完动画之后将自身面板禁用 节约性能
+        tweener.OnComplete(() => gameObject.SetActive(false));
+    }
+
     // 处理close按钮的点击
     private void OnCloseClick()
     {
