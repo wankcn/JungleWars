@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Common;
 using UnityEngine;
@@ -16,11 +17,8 @@ public class LoginPanel : BasePanel
 
     private LoginRequest loginRequest;
 
-    public override void OnEnter()
+    private void Start()
     {
-        base.OnEnter();
-        EnterAnim();
-
         loginRequest = GetComponent<LoginRequest>();
 
         usernameIF = transform.Find("UsernameLabel/UsernameInput").GetComponent<InputField>();
@@ -32,6 +30,12 @@ public class LoginPanel : BasePanel
         // 通过transform.Find方法查找到登录和注册按钮
         transform.Find("LoginButton").GetComponent<Button>().onClick.AddListener(OnLoginClick);
         transform.Find("RegisterButton").GetComponent<Button>().onClick.AddListener(OnRegisterClick);
+    }
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        EnterAnim();
     }
 
     // 当界面暂停 需要进行隐藏

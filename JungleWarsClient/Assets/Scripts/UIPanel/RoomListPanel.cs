@@ -1,5 +1,6 @@
 ﻿// 控制面板的显示 当登录成功之后
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -12,12 +13,21 @@ public class RoomListPanel : BasePanel
     private RectTransform battleRes;
     private RectTransform roomList;
 
-    public override void OnEnter()
+    private void Start()
     {
         battleRes = transform.Find("BattleRes").GetComponent<RectTransform>();
         roomList = transform.Find("RoomList").GetComponent<RectTransform>();
         transform.Find("RoomList/CloseButton").GetComponent<Button>().onClick.AddListener(OnCloseClick);
         EnterAnim();
+    }
+
+    public override void OnEnter()
+    {
+        // 初始化完成之后才会调用
+        if (battleRes != null)
+        {
+            EnterAnim();
+        }
     }
 
     public override void OnExit()
@@ -31,7 +41,6 @@ public class RoomListPanel : BasePanel
         PlayClikSound();
         // 将自身弹出去
         uiMng.PopPanel();
-        
     }
 
     // 进入的动画
