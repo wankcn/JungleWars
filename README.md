@@ -178,7 +178,7 @@ Unity3D开发网络游戏
 
 
 
-### 7月19日
+#### 7月19日
 
 1. 面板加载各种动画的开发
 
@@ -193,6 +193,22 @@ Unity3D开发网络游戏
    把OnClick事件放在Start方法里面，保证代码只执行一次。
 
 3. 修改LoginPanel和RegisterPanel面板的Start方法
+
+
+
+#### 7月20日
+
+1. 建立Model-Result类
+2. 创建ResultDAO对Result进行增删改查
+3. 修改服务器端对登录请求的处理UserController
+
+
+
+#### 7月21日
+
+
+
+
 
  
 
