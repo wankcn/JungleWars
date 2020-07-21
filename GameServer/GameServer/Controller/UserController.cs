@@ -10,6 +10,7 @@ namespace GameServer.Controller
     {
         // 创建一个Dao对象
         private UserDAO userDAO = new UserDAO();
+        private ResultDAO resultDAO = new ResultDAO();
 
         public UserController()
         {
@@ -31,7 +32,11 @@ namespace GameServer.Controller
                 return ((int) ReturnCode.Fail).ToString();
             }
 
-            return ((int) ReturnCode.Success).ToString();
+            // 进行查询
+            Result res = resultDAO.GetResultByUserid(client.MySqlConn, user.Id);
+            // returncode代表状态码 用户名 战绩
+            return string.Format("{0},{1},{2},{3}",
+                ((int) ReturnCode.Success).ToString(),user.Username,res.TotalCount,res.WinCount);
         }
 
         // 用来处理注册请求 存在注册失败，不存在注册成功
