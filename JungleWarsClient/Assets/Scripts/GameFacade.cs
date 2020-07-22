@@ -37,7 +37,6 @@ public class GameFacade : MonoBehaviour
     {
         // 对manager进行初始化
         InitManager();
-        
     }
 
     void Update()
@@ -132,5 +131,16 @@ public class GameFacade : MonoBehaviour
     public void PlayNormalSound(string soundName)
     {
         audioMng.PlayNormalSound(soundName);
+    }
+
+    // 中介者模式方便LoginRequest访问
+    public void SetUserData(UserData ud)
+    {
+        playerMng.UserData = ud;
+    }
+
+    public UserData GetUserData()
+    {
+        return playerMng.UserData;
     }
 }
