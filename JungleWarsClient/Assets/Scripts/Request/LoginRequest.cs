@@ -28,10 +28,23 @@ public class LoginRequest : BaseRequest
     // 重写OnResponse data是服务器端发送的响应数据 数据的解析 具体处理交给LoginPanel 
     public override void OnResponse(string data)
     {
+        // 逗号分割数据
+        string[] strs = data.Split(',');
+        
         // data先转int，然后整体强制转换枚举类型
-        ReturnCode returnCode = (ReturnCode) int.Parse(data);
+        ReturnCode returnCode = (ReturnCode) int.Parse(strs[0]);
 
         // 通过LoginPanel调用响应方法
         loginPanel.OnLoginResponse(returnCode);
+
+        if (returnCode == ReturnCode.Success)
+        {
+            // 保留信息方便显示 
+            string username = strs[1];
+            int totalCount = int.Parse(strs[2]);
+            int winCount = int.Parse(strs[3]);
+            UserData ud = new UserData(username, totalCount, winCount);
+            facade.SetUserData(ud);
+        }
     }
 }
