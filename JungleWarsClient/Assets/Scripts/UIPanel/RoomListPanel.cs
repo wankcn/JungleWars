@@ -23,6 +23,7 @@ public class RoomListPanel : BasePanel
 
     public override void OnEnter()
     {
+        SetBattleRes();
         // 初始化完成之后才会调用
         if (battleRes != null)
         {
@@ -60,5 +61,15 @@ public class RoomListPanel : BasePanel
         battleRes.DOLocalMoveX(-1000, 0.5f);
         // 当前游戏物体进行隐藏
         roomList.DOLocalMoveX(1000, 0.5f).OnComplete(() => gameObject.SetActive(false));
+    }
+
+    // 添加方法用于设置组件 设置战斗结果
+    private void SetBattleRes()
+    {
+        UserData ud = facade.GetUserData();
+        // 对组件进行赋值
+        transform.Find("BattleRes/Username").GetComponent<Text>().text = ud.Username;
+        transform.Find("BattleRes/TotalCount").GetComponent<Text>().text = "总场数:" + ud.TotalCount;
+        transform.Find("BattleRes/WinCount").GetComponent<Text>().text = "胜利:" + ud.WinCount;
     }
 }

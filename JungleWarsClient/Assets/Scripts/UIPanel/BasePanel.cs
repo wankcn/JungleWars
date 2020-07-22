@@ -3,7 +3,8 @@ using System.Collections;
 
 public class BasePanel : MonoBehaviour
 {
-    private GameFacade facade;
+    // protected子类访问
+    protected GameFacade facade;
 
     // 提供可以访问到UIManager的成员
     protected UIManager uiMng;

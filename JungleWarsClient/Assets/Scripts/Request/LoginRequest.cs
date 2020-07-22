@@ -39,7 +39,6 @@ public class LoginRequest : BaseRequest
 
         if (returnCode == ReturnCode.Success)
         {
-            // 保留信息方便显示 
             string username = strs[1];
             int totalCount = int.Parse(strs[2]);
             int winCount = int.Parse(strs[3]);
