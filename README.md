@@ -223,6 +223,22 @@ Unity3D开发网络游戏
 
 3. 动态创建房间列表 
 
+   在RoomList里处理RoomItem的加载，加载到ScrollRect-Layout-VerticalLayoutGroup
+
+   根据房间加载的个数来设置布局的高度
+
+   （Anchor只有在父物体的宽高发生变化的时候，才会对自身产生影响）
+
+   center修改为pivot，pivot设置y为1，占百分之百高度，解决点击加载房间在屏幕正中间的问题，即修改layout的中心点
+
+   center是视觉中心点，pivot是计算坐标的点，是一个比例
+
+
+
+#### 7月23日
+
+1.服务器端创建于房间相关的类与成员
+
 
 
  
