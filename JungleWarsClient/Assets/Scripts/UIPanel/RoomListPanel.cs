@@ -12,11 +12,17 @@ public class RoomListPanel : BasePanel
     // 通过RectTransform控制运动
     private RectTransform battleRes;
     private RectTransform roomList;
+    private VerticalLayoutGroup roomLayout;
+    private GameObject roomItemPrefab;
+
+    private List<UserData> udList = null;
 
     private void Start()
     {
         battleRes = transform.Find("BattleRes").GetComponent<RectTransform>();
         roomList = transform.Find("RoomList").GetComponent<RectTransform>();
+        roomLayout = transform.Find("RoomList/ScrollRect/Layout").GetComponent<VerticalLayoutGroup>();
+        roomItemPrefab = Resources.Load("UIPanel/RoomItem") as GameObject; // 通过资源加载
         transform.Find("RoomList/CloseButton").GetComponent<Button>().onClick.AddListener(OnCloseClick);
         EnterAnim();
     }
@@ -71,5 +77,32 @@ public class RoomListPanel : BasePanel
         transform.Find("BattleRes/Username").GetComponent<Text>().text = ud.Username;
         transform.Find("BattleRes/TotalCount").GetComponent<Text>().text = "总场数:" + ud.TotalCount;
         transform.Find("BattleRes/WinCount").GetComponent<Text>().text = "胜利:" + ud.WinCount;
+    }
+
+    private void LoadRoomItem(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            // 实例化后放在布局下
+            GameObject roomItem = GameObject.Instantiate(roomItemPrefab);
+            roomItem.transform.SetParent(roomLayout.transform);
+        }
+
+        // 得到子物体的个数
+        int roomCount = GetComponentsInChildren<RoomItem>().Length;
+        // 得到原有的size
+        Vector2 size = roomLayout.GetComponent<RectTransform>().sizeDelta;
+        // 房间个数乘以房间自身高度 需要加上房间与房间之间的间隔
+        roomLayout.GetComponent<RectTransform>().sizeDelta = new Vector2(size.x,
+            roomCount * (roomItemPrefab.GetComponent<RectTransform>().sizeDelta.y + roomLayout.spacing));
+    }
+
+    private void Update()
+    {
+        // 按下鼠标左键的时候 在场景中加载roomItem
+        if (Input.GetMouseButtonDown(0))
+        {
+            LoadRoomItem(1);
+        }
     }
 }
