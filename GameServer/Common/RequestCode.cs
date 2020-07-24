@@ -6,7 +6,7 @@ namespace Common
     {
         None,
         User, // 登录请求
-        Room,
+        Room, // 房间
         Game
     }
 }
