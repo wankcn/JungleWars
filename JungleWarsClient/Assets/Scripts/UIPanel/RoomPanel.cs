@@ -46,8 +46,8 @@ public class RoomPanel : BasePanel
         bluePanel = transform.Find("BluePanel");
         redPanel = transform.Find("RedPanel");
         startButton = transform.Find("StartButton");
-        exitButton = transform.Find("ExitButton"); 
-        
+        exitButton = transform.Find("ExitButton");
+
         // 基本信息的方法注册监听
         transform.Find("StartButton").GetComponent<Button>().onClick.AddListener(OnStartClick);
         transform.Find("ExitButton").GetComponent<Button>().onClick.AddListener(OnExitClick);
@@ -60,13 +60,9 @@ public class RoomPanel : BasePanel
 
     public override void OnEnter()
     {
+        // 第一次进入bluePanel为空，只在start方法中调用
         if (bluePanel != null)
             EnterAnim();
-    }
-
-    public override void OnExit()
-    {
-        ExitAnim();
     }
 
     public override void OnPause()
@@ -77,6 +73,11 @@ public class RoomPanel : BasePanel
     public override void OnResume()
     {
         EnterAnim();
+    }
+
+    public override void OnExit()
+    {
+        ExitAnim();
     }
 
     private void Update()
@@ -121,7 +122,7 @@ public class RoomPanel : BasePanel
         enemyPlayerTotalCount.text = "总场数：" + totalCount;
         enemyPlayerWinCount.text = "胜利：" + winCount;
     }
-    
+
     // 敌方玩家未加入时需要清空结果 所以数据设置为空
     public void ClearEnemyPlayerRes()
     {
@@ -141,7 +142,7 @@ public class RoomPanel : BasePanel
         this.ud1 = ud1;
         this.ud2 = ud2;
     }
-    
+
     // 开始游戏的监听
     private void OnStartClick()
     {

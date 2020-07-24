@@ -24,6 +24,7 @@ public class RoomListPanel : BasePanel
         roomLayout = transform.Find("RoomList/ScrollRect/Layout").GetComponent<VerticalLayoutGroup>();
         roomItemPrefab = Resources.Load("UIPanel/RoomItem") as GameObject; // 通过资源加载
         transform.Find("RoomList/CloseButton").GetComponent<Button>().onClick.AddListener(OnCloseClick);
+        transform.Find("RoomList/CreateRoomButton").GetComponent<Button>().onClick.AddListener(OnCreateRoomClick);
         EnterAnim();
     }
 
@@ -37,6 +38,17 @@ public class RoomListPanel : BasePanel
         }
     }
 
+    // 新面板加载出来时会调用OnPause 暂停是隐藏列表面板
+    public override void OnPause()
+    {
+       HideAnim();
+    }
+
+    public override void OnResume()
+    {
+        EnterAnim();
+    }
+
     public override void OnExit()
     {
         HideAnim(); // 退出时进行隐藏
@@ -48,6 +60,12 @@ public class RoomListPanel : BasePanel
         PlayClikSound();
         // 将自身弹出去
         uiMng.PopPanel();
+    }
+
+    // 注册创建房间按钮
+    private void OnCreateRoomClick()
+    {
+        uiMng.PushPanel(UIPanelType.Room);
     }
 
     // 进入的动画
@@ -97,12 +115,13 @@ public class RoomListPanel : BasePanel
             roomCount * (roomItemPrefab.GetComponent<RectTransform>().sizeDelta.y + roomLayout.spacing));
     }
 
-    private void Update()
-    {
-        // 按下鼠标左键的时候 在场景中加载roomItem
-        if (Input.GetMouseButtonDown(0))
-        {
-            LoadRoomItem(1);
-        }
-    }
+    // 测试加载房间
+    // private void Update()
+    // {
+    //     // 按下鼠标左键的时候 在场景中加载roomItem
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //         LoadRoomItem(1);
+    //     }
+    // }
 }
