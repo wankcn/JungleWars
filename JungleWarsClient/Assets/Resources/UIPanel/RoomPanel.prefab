@@ -243,6 +243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6645035455193589684}
+  - component: {fileID: 5828109418561571339}
   m_Layer: 5
   m_Name: RoomPanel
   m_TagString: Untagged
@@ -273,6 +274,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.00079346}
   m_SizeDelta: {x: 1862, y: 1164.0016}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5828109418561571339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6645035455193589683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5e12a9736da1443a822b0fd84e3421b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6645035456109263243
 GameObject:
   m_ObjectHideFlags: 0
