@@ -19,6 +19,10 @@
     {
       "panelTypeString": "RoomList",
       "path": "UIPanel/RoomListPanel"
+    },
+    {
+      "panelTypeString": "Room",
+      "path": "UIPanel/RoomPanel"
     }
   ]
 }
