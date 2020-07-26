@@ -27,10 +27,13 @@ public class RoomPanel : BasePanel
     private UserData ud1 = null;
     private UserData ud2 = null;
 
+    // 持有request的引用
+    private CreateRoomRequest crRequest;
     // private QuitRoomRequest quitRoomRequest;
     // private StartGameRequest startGameRequest;
 
     private bool isPopPanel = false;
+
 
     private void Start()
     {
@@ -48,6 +51,7 @@ public class RoomPanel : BasePanel
         startButton = transform.Find("StartButton");
         exitButton = transform.Find("ExitButton");
 
+        crRequest = GetComponent<CreateRoomRequest>();
         // 基本信息的方法注册监听
         transform.Find("StartButton").GetComponent<Button>().onClick.AddListener(OnStartClick);
         transform.Find("ExitButton").GetComponent<Button>().onClick.AddListener(OnExitClick);
@@ -63,6 +67,9 @@ public class RoomPanel : BasePanel
         // 第一次进入bluePanel为空，只在start方法中调用
         if (bluePanel != null)
             EnterAnim();
+        if (crRequest == null)
+            crRequest = GetComponent<CreateRoomRequest>();
+        crRequest.SendRequest();
     }
 
     public override void OnPause()
@@ -82,31 +89,44 @@ public class RoomPanel : BasePanel
 
     private void Update()
     {
+        // 如果ud不为空进行设置
         if (ud != null)
         {
             SetLocalPlayerRes(ud.Username, ud.TotalCount.ToString(), ud.WinCount.ToString());
-            ClearEnemyPlayerRes();
-            ud = null;
+            ClearEnemyPlayerRes(); // 红色面板清空等待用户加入
+            ud = null; // 设置完之后将ud设置为空，下次异步条件不再执行
         }
 
-        if (ud1 != null)
-        {
-            SetLocalPlayerRes(ud1.Username, ud1.TotalCount.ToString(), ud1.WinCount.ToString());
-            if (ud2 != null)
-                SetEnemyPlayerRes(ud2.Username, ud2.TotalCount.ToString(), ud2.WinCount.ToString());
-            else
-                ClearEnemyPlayerRes();
-            ud1 = null;
-            ud2 = null;
-        }
-
-        if (isPopPanel)
-        {
-            uiMng.PopPanel();
-            isPopPanel = false;
-        }
+        // if (ud1 != null)
+        // {
+        //     SetLocalPlayerRes(ud1.Username, ud1.TotalCount.ToString(), ud1.WinCount.ToString());
+        //     if (ud2 != null)
+        //         SetEnemyPlayerRes(ud2.Username, ud2.TotalCount.ToString(), ud2.WinCount.ToString());
+        //     else
+        //         ClearEnemyPlayerRes();
+        //     ud1 = null;
+        //     ud2 = null;
+        // }
+        //
+        // if (isPopPanel)
+        // {
+        //     uiMng.PopPanel();
+        //     isPopPanel = false;
+        // }
     }
 
+    // 异步方式 
+    public void SetLocalPlayerResSync()
+    {
+        ud = facade.GetUserData();
+    }
+
+    public void SetAllPlayerResSync(UserData ud1, UserData ud2)
+    {
+        this.ud1 = ud1;
+        this.ud2 = ud2;
+    }
+ 
     // 本地角色战绩设置
     public void SetLocalPlayerRes(string username, string totalCount, string winCount)
     {
@@ -129,18 +149,6 @@ public class RoomPanel : BasePanel
         enemyPlayerUsername.text = "";
         enemyPlayerTotalCount.text = "等待玩家加入....";
         enemyPlayerWinCount.text = "";
-    }
-
-    // 异步方式 
-    public void SetLocalPlayerResSync()
-    {
-        ud = facade.GetUserData();
-    }
-
-    public void SetAllPlayerResSync(UserData ud1, UserData ud2)
-    {
-        this.ud1 = ud1;
-        this.ud2 = ud2;
     }
 
     // 开始游戏的监听

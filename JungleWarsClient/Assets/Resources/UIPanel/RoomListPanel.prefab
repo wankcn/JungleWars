@@ -698,6 +698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4657694856348128397}
   - component: {fileID: 1656521386160541066}
+  - component: {fileID: 6611518041531478877}
   m_Layer: 5
   m_Name: RoomListPanel
   m_TagString: Untagged
@@ -736,6 +737,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c95c5d079eedc4930ad5e0624bb3649a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6611518041531478877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4657694856348128398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae67cf973e2de4a75ab681ec2da75670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4657694856472111911
