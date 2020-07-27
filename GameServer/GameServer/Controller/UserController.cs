@@ -34,9 +34,11 @@ namespace GameServer.Controller
 
             // 进行查询
             Result res = resultDAO.GetResultByUserid(client.MySqlConn, user.Id);
+            // 成功把战绩和账号保存到client里
+            client.SetUserData(user, res);
             // returncode代表状态码 用户名 战绩
             return string.Format("{0},{1},{2},{3}",
-                ((int) ReturnCode.Success).ToString(),user.Username,res.TotalCount,res.WinCount);
+                ((int) ReturnCode.Success).ToString(), user.Username, res.TotalCount, res.WinCount);
         }
 
         // 用来处理注册请求 存在注册失败，不存在注册成功

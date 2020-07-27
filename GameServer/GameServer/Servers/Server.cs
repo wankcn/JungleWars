@@ -18,7 +18,7 @@ namespace GameServer.Servers
         // 管理所有客户端和房间
         private List<Client> clientList = new List<Client>();
         private List<Room> roomList = new List<Room>();
-        
+
 
         // 不需要初始化参数，直接new构造
         private ControllerManager controllerManager;
@@ -86,6 +86,21 @@ namespace GameServer.Servers
             // 把方法的调用传递给CcontrollerManager
             // 通过sever中介，Manager与sercer交互 server与client交互 
             controllerManager.HandleRequest(requestCode, actionCode, data, client);
+        }
+
+        // 在server创建房间 第一个client为创建者
+        public void CreateRoom(Client client)
+        {
+            // Room room = new Room(this);
+            Room room = new Room(this);
+            room.AddClient(client); // 创建房间
+            roomList.Add(room); // 交给列表进行管理
+        }
+
+        // 提供一个get方法可以得到room集合
+        public List<Room> GetRoomList()
+        {
+            return roomList;
         }
     }
 }

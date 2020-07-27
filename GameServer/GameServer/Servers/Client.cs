@@ -4,6 +4,7 @@ using System;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using Common;
+using GameServer.Model;
 using GameServer.Tool;
 using MySql.Data.MySqlClient;
 
@@ -19,6 +20,10 @@ namespace GameServer.Servers
         // 对数据库的连接
         private MySqlConnection mysqlConn;
 
+        // 
+        private User user;
+        private Result result;
+
         public Client()
         {
         }
@@ -28,6 +33,19 @@ namespace GameServer.Servers
             this.clientSocket = clientSocket;
             this.server = server;
             mysqlConn = ConnHelper.Connect(); // 创建client时就建立连接
+        }
+
+        // 用来获取房间信息 将数据组拼成字符串返回        
+        public string GetUserData()
+        {
+            return user.Id+","+ user.Username + "," + result.TotalCount + "," + result.WinCount;
+        }
+        
+        // 提供UserController设置User和Result的方法
+        public void SetUserData(User user, Result result)
+        {
+            this.user = user;
+            this.result = result;
         }
 
         public MySqlConnection MySqlConn => mysqlConn; // get方法
@@ -49,6 +67,8 @@ namespace GameServer.Servers
             try
             {
                 // 先接收数据的长度
+                if (clientSocket == null || clientSocket.Connected == false)
+                    return;
                 int count = clientSocket.EndReceive(ar);
                 if (count == 0)
                 {

@@ -13,12 +13,37 @@ namespace GameServer.Servers
         Battle,
         End
     }
-    public class Room 
+
+    public class Room
     {
         // 存储当前房间里所有的客户端
         private List<Client> clientRoom = new List<Client>();
 
-        // 默认等待加入
-        private RoomState state = RoomState.WaitingJoin; 
+        private RoomState state = RoomState.WaitingJoin; // 默认等待加入
+        private Server server;
+
+        public Room(Server server)
+        {
+            this.server = server;
+        }
+
+        // 房间是否在等待加入
+        public bool IsWaitingJoin()
+        {
+            return state == RoomState.WaitingJoin;
+        }
+        
+        // 添加房间的功能
+        public void AddClient(Client client)
+        {
+            // 添加的第一个默认是房间的创建者，也是房间管理者 开始游戏只能用创建者开始游戏
+            clientRoom.Add(client);
+        }
+
+        // 得到房主信息 集合中第一个room
+        public string GetHouseOwnerData()
+        {
+            return clientRoom[0].GetUserData();
+        }
     }
 }
