@@ -32,7 +32,7 @@ public class AudioManager : BaseManager
         normalAudioSource = audioSourceGO.AddComponent<AudioSource>();
 
         // 默认控制背景声音的播放 Sound_Bg_Moderate 正常速度背景声音
-        PlaySound(bgAudioSource, LoadSound(Sound_Bg_Moderate), 0.5f, true);
+        PlaySound(bgAudioSource, LoadSound(Sound_Bg_Moderate), 0.1f, true);
     }
 
     // 播放普通声音用于外界播放 通过字符串加载声音 

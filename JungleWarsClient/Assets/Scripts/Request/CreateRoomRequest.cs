@@ -13,10 +13,14 @@ public class CreateRoomRequest : BaseRequest
     {
         requestCode = RequestCode.Room;
         actionCode = ActionCode.CreateRoom;
-        roomPanel = GetComponent<RoomPanel>();
         base.Awake();
     }
 
+    public void SetPanel( BasePanel panel)
+    {
+        // 设置值时需要强制转型
+        roomPanel = panel as RoomPanel;
+    }
     // 用来发起请求
     public override void SendRequest()
     {

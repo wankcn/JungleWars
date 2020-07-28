@@ -6,6 +6,7 @@ using System.Text;
 
 public class UserData
 {
+    // 进行解析的构造方法
     public UserData(string userData)
     {
         string[] strs = userData.Split(',');

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Common;
 
 public class RoomListPanel : BasePanel
 {
@@ -18,9 +19,12 @@ public class RoomListPanel : BasePanel
     private ListRoomRequest listRoomRequest;
 
     private CreateRoomRequest createRoomRequest;
-    // private JoinRoomRequest joinRoomRequest;
+    private JoinRoomRequest joinRoomRequest;
 
     private List<UserData> udList = null; // 定义集合存储房间信息默认为空
+
+    private UserData ud1 = null;
+    private UserData ud2 = null;
 
     private void Start()
     {
@@ -30,10 +34,10 @@ public class RoomListPanel : BasePanel
         roomItemPrefab = Resources.Load("UIPanel/RoomItem") as GameObject; // 通过资源加载
         transform.Find("RoomList/CloseButton").GetComponent<Button>().onClick.AddListener(OnCloseClick);
         transform.Find("RoomList/CreateRoomButton").GetComponent<Button>().onClick.AddListener(OnCreateRoomClick);
-        // transform.Find("RoomList/RefreshButton").GetComponent<Button>().onClick.AddListener(OnRefreshClick);
+        transform.Find("RoomList/RefreshButton").GetComponent<Button>().onClick.AddListener(OnRefreshClick);
         listRoomRequest = GetComponent<ListRoomRequest>();
         createRoomRequest = GetComponent<CreateRoomRequest>();
-        // joinRoomRequest = GetComponent<JoinRoomRequest>();
+        joinRoomRequest = GetComponent<JoinRoomRequest>();
         EnterAnim();
     }
 
@@ -50,6 +54,7 @@ public class RoomListPanel : BasePanel
         {
             listRoomRequest = GetComponent<ListRoomRequest>();
         }
+
         listRoomRequest.SendRequest();
     }
 
@@ -71,7 +76,15 @@ public class RoomListPanel : BasePanel
         if (udList != null)
         {
             LoadRoomItem(udList);
-            udList = null; // 防止重复加载
+            udList = null;
+        }
+
+        if (ud1 != null && ud2 != null)
+        {
+            BasePanel panel = uiMng.PushPanel(UIPanelType.Room);
+            (panel as RoomPanel).SetAllPlayerResSync(ud1, ud2);
+            ud1 = null;
+            ud2 = null;
         }
     }
 
@@ -91,7 +104,16 @@ public class RoomListPanel : BasePanel
     // 注册创建房间按钮
     private void OnCreateRoomClick()
     {
-        uiMng.PushPanel(UIPanelType.Room);
+        // 加载UI 发起创建房间的请求 panel返回出来进行赋值
+        BasePanel panel = uiMng.PushPanel(UIPanelType.Room);
+        createRoomRequest.SetPanel(panel);
+        createRoomRequest.SendRequest(); // 发起创建房间请求
+    }
+
+    // 刷新面板
+    private void OnRefreshClick()
+    {
+        listRoomRequest.SendRequest();
     }
 
     // 进入的动画
@@ -158,13 +180,31 @@ public class RoomListPanel : BasePanel
         roomLayout.GetComponent<RectTransform>().sizeDelta = new Vector2(size.x,
             roomCount * (roomItemPrefab.GetComponent<RectTransform>().sizeDelta.y + roomLayout.spacing));
     }
-    
+
     // ID 是roomid 房主账号的id是唯一的
     public void OnJoinClick(int id)
     {
-        // joinRoomRequest.SendRequest(id);
+        joinRoomRequest.SendRequest(id);
     }
-    
+
+    // 处理加入完成返回的结果
+    public void OnJoinResponse(ReturnCode returnCode, UserData ud1, UserData ud2)
+    {
+        // 只有success才会取得数据
+        switch (returnCode)
+        {
+            case ReturnCode.NotFound:
+                uiMng.ShowMessageSync("房间被销毁无法加入");
+                break;
+            case ReturnCode.Fail:
+                uiMng.ShowMessageSync("房间已满，无法加入");
+                break;
+            case ReturnCode.Success:
+                this.ud1 = ud1;
+                this.ud2 = ud2;
+                break;
+        }
+    }
 
     // 测试加载房间
     // private void Update()

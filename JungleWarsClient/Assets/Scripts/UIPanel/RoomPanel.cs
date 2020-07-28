@@ -28,7 +28,7 @@ public class RoomPanel : BasePanel
     private UserData ud2 = null;
 
     // 持有request的引用
-    private CreateRoomRequest crRequest;
+    // private CreateRoomRequest crRequest;
     // private QuitRoomRequest quitRoomRequest;
     // private StartGameRequest startGameRequest;
 
@@ -51,7 +51,6 @@ public class RoomPanel : BasePanel
         startButton = transform.Find("StartButton");
         exitButton = transform.Find("ExitButton");
 
-        crRequest = GetComponent<CreateRoomRequest>();
         // 基本信息的方法注册监听
         transform.Find("StartButton").GetComponent<Button>().onClick.AddListener(OnStartClick);
         transform.Find("ExitButton").GetComponent<Button>().onClick.AddListener(OnExitClick);
@@ -67,9 +66,9 @@ public class RoomPanel : BasePanel
         // 第一次进入bluePanel为空，只在start方法中调用
         if (bluePanel != null)
             EnterAnim();
-        if (crRequest == null)
-            crRequest = GetComponent<CreateRoomRequest>();
-        crRequest.SendRequest();
+        // if (crRequest == null)
+        //     crRequest = GetComponent<CreateRoomRequest>();
+        // crRequest.SendRequest();
     }
 
     public override void OnPause()
@@ -97,17 +96,17 @@ public class RoomPanel : BasePanel
             ud = null; // 设置完之后将ud设置为空，下次异步条件不再执行
         }
 
-        // if (ud1 != null)
-        // {
-        //     SetLocalPlayerRes(ud1.Username, ud1.TotalCount.ToString(), ud1.WinCount.ToString());
-        //     if (ud2 != null)
-        //         SetEnemyPlayerRes(ud2.Username, ud2.TotalCount.ToString(), ud2.WinCount.ToString());
-        //     else
-        //         ClearEnemyPlayerRes();
-        //     ud1 = null;
-        //     ud2 = null;
-        // }
-        //
+        if (ud1 != null)
+        {
+            SetLocalPlayerRes(ud1.Username, ud1.TotalCount.ToString(), ud1.WinCount.ToString());
+            if (ud2 != null)
+                SetEnemyPlayerRes(ud2.Username, ud2.TotalCount.ToString(), ud2.WinCount.ToString());
+            else
+                ClearEnemyPlayerRes();
+            ud1 = null;
+            ud2 = null;
+        }
+
         // if (isPopPanel)
         // {
         //     uiMng.PopPanel();
@@ -126,7 +125,7 @@ public class RoomPanel : BasePanel
         this.ud1 = ud1;
         this.ud2 = ud2;
     }
- 
+
     // 本地角色战绩设置
     public void SetLocalPlayerRes(string username, string totalCount, string winCount)
     {
