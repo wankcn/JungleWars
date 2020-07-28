@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Common;
 
 namespace GameServer.Servers
 {
@@ -92,6 +93,18 @@ namespace GameServer.Servers
                 sb.Remove(sb.Length - 1, 1); // 去掉多余"|"
             }
             return sb.ToString();
+        }
+        
+        // 广播消息给房间里的其他玩家 当前点击加入的客户端不需要重复发送消息
+        public void BroadcastMessage(Client excludeClient,ActionCode actionCode,string data)
+        {
+            foreach(Client client in clientRoom)
+            {
+                if (client != excludeClient)
+                {
+                    server.SendResponse(client, actionCode, data);
+                }
+            }
         }
     }
 }

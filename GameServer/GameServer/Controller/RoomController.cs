@@ -65,7 +65,8 @@ namespace GameServer.Controller
                 room.AddClient(client);
                 // 将房间所有信息返回给客户端
                 string roomData = room.GetRoomData();//"returncode,roletype-id,username,tc,wc|id,username,tc,wc"
-                // room.BroadcastMessage(client, ActionCode.UpdateRoom, roomData);
+                // 当心新的玩家加入房间的时候，在这个房间里发送一个广播将信息广播给其他玩家的客户端
+                room.BroadcastMessage(client, ActionCode.UpdateRoom, roomData);//roomDate不包含returncode
                 return ((int)ReturnCode.Success) +  "-" + roomData;
                 // "," + ((int)RoleType.Red).ToString()+
             }

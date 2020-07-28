@@ -10,7 +10,7 @@ namespace Common
         ListRoom,
         CreateRoom,
         JoinRoom,
-        UpdateRoom,
+        UpdateRoom, //更新房间
         QuitRoom,
         StartGame,
         ShowTimer,
