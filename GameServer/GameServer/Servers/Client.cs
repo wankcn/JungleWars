@@ -115,12 +115,13 @@ namespace GameServer.Servers
             // 关闭连接
             if (clientSocket != null)
                 clientSocket.Close();
-            server.RemoveCLient(this);
             // 将自身连接移除
             if (room != null)
             {
                 room.Close(this);
             }
+            // 先关闭后移除
+            server.RemoveCLient(this);
         }
 
         // 进行响应 数据包装发送
