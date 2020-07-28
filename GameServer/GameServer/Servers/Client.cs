@@ -20,7 +20,7 @@ namespace GameServer.Servers
         // 对数据库的连接
         private MySqlConnection mysqlConn;
 
-        // 
+        private Room room;
         private User user;
         private Result result;
 
@@ -38,9 +38,15 @@ namespace GameServer.Servers
         // 用来获取房间信息 将数据组拼成字符串返回        
         public string GetUserData()
         {
-            return user.Id+","+ user.Username + "," + result.TotalCount + "," + result.WinCount;
+            return user.Id + "," + user.Username + "," + result.TotalCount + "," + result.WinCount;
         }
-        
+
+        public Room Room
+        {
+            set { room = value; }
+            get { return room; }
+        }
+
         // 提供UserController设置User和Result的方法
         public void SetUserData(User user, Result result)
         {
@@ -103,8 +109,12 @@ namespace GameServer.Servers
             // 关闭连接
             if (clientSocket != null)
                 clientSocket.Close();
-            // 将自身连接移除
             server.RemoveCLient(this);
+            // 将自身连接移除
+            if (room != null)
+            {
+                room.Close(this);
+            }
         }
 
         // 进行响应 数据包装发送

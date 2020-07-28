@@ -32,18 +32,33 @@ namespace GameServer.Servers
         {
             return state == RoomState.WaitingJoin;
         }
-        
+
         // 添加房间的功能
         public void AddClient(Client client)
         {
             // 添加的第一个默认是房间的创建者，也是房间管理者 开始游戏只能用创建者开始游戏
             clientRoom.Add(client);
+            client.Room = this;
         }
 
         // 得到房主信息 集合中第一个room
         public string GetHouseOwnerData()
         {
             return clientRoom[0].GetUserData();
+        }
+
+        // 关闭房间 判断是否是房主，是房主关闭，不是房主保留，从client里移除
+        public void Close(Client client)
+        {
+            // 是房主进行移除
+            if (client == clientRoom[0])
+            {
+                server.RemoveRoom(this);
+            }
+            else
+            {
+                clientRoom.Remove(client);
+            }
         }
     }
 }

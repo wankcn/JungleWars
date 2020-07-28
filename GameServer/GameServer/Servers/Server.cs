@@ -96,6 +96,15 @@ namespace GameServer.Servers
             room.AddClient(client); // 创建房间
             roomList.Add(room); // 交给列表进行管理
         }
+        
+        // 用来移除房间
+        public void RemoveRoom(Room room)
+        {
+            if (roomList != null && room != null)
+            {
+                roomList.Remove(room);
+            }
+        }
 
         // 提供一个get方法可以得到room集合
         public List<Room> GetRoomList()
