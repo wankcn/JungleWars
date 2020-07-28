@@ -83688,6 +83688,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6645035455193589683, guid: b42a0948cf1e94c43803665bb762a70c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6645035455193589684, guid: b42a0948cf1e94c43803665bb762a70c,
         type: 3}
       propertyPath: m_LocalPosition.x

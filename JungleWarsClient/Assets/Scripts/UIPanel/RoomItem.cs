@@ -45,11 +45,13 @@ public class RoomItem : MonoBehaviour
     // 加入按钮点击事件
     private void OnJoinClick()
     {
-        // panel.OnJoinClick(id);
+        panel.OnJoinClick(id);
     }
 
+    // 销毁自身的方法
     public void DestroySelf()
     {
+        // 将自身游戏物体销毁
         GameObject.Destroy(this.gameObject);
     }
 }

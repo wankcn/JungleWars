@@ -15,7 +15,12 @@ public class RoomListPanel : BasePanel
     private VerticalLayoutGroup roomLayout;
     private GameObject roomItemPrefab;
 
-    private List<UserData> udList = null;
+    private ListRoomRequest listRoomRequest;
+
+    private CreateRoomRequest createRoomRequest;
+    // private JoinRoomRequest joinRoomRequest;
+
+    private List<UserData> udList = null; // 定义集合存储房间信息默认为空
 
     private void Start()
     {
@@ -25,6 +30,10 @@ public class RoomListPanel : BasePanel
         roomItemPrefab = Resources.Load("UIPanel/RoomItem") as GameObject; // 通过资源加载
         transform.Find("RoomList/CloseButton").GetComponent<Button>().onClick.AddListener(OnCloseClick);
         transform.Find("RoomList/CreateRoomButton").GetComponent<Button>().onClick.AddListener(OnCreateRoomClick);
+        // transform.Find("RoomList/RefreshButton").GetComponent<Button>().onClick.AddListener(OnRefreshClick);
+        listRoomRequest = GetComponent<ListRoomRequest>();
+        createRoomRequest = GetComponent<CreateRoomRequest>();
+        // joinRoomRequest = GetComponent<JoinRoomRequest>();
         EnterAnim();
     }
 
@@ -36,17 +45,34 @@ public class RoomListPanel : BasePanel
         {
             EnterAnim();
         }
+
+        if (listRoomRequest == null)
+        {
+            listRoomRequest = GetComponent<ListRoomRequest>();
+        }
+        listRoomRequest.SendRequest();
     }
 
     // 新面板加载出来时会调用OnPause 暂停是隐藏列表面板
     public override void OnPause()
     {
-       HideAnim();
+        HideAnim();
     }
 
     public override void OnResume()
     {
         EnterAnim();
+        // 页面重新激活刷新列表重新发起一次请求
+        listRoomRequest.SendRequest();
+    }
+
+    private void Update()
+    {
+        if (udList != null)
+        {
+            LoadRoomItem(udList);
+            udList = null; // 防止重复加载
+        }
     }
 
     public override void OnExit()
@@ -97,15 +123,33 @@ public class RoomListPanel : BasePanel
         transform.Find("BattleRes/WinCount").GetComponent<Text>().text = "胜利:" + ud.WinCount;
     }
 
-    private void LoadRoomItem(int count)
+    // 提供异步方法供ListRoomRequest访问
+    public void LoadRoomItemSync(List<UserData> udList)
     {
+        this.udList = udList;
+    }
+
+    private void LoadRoomItem(List<UserData> udList)
+    {
+        // 加载之前先进行清空操作 防止重复加载 得到roomLayout下的所有子物体
+        RoomItem[] riArray = roomLayout.GetComponentsInChildren<RoomItem>();
+        foreach (RoomItem ri in riArray)
+        {
+            ri.DestroySelf(); // 所有roomItem现存的物体销毁掉
+        }
+
+        int count = udList.Count;
         for (int i = 0; i < count; i++)
         {
             // 实例化后放在布局下
             GameObject roomItem = GameObject.Instantiate(roomItemPrefab);
             roomItem.transform.SetParent(roomLayout.transform);
+            UserData ud = udList[i];
+            roomItem.GetComponent<RoomItem>().SetRoomInfo(ud.Id, ud.Username,
+                ud.TotalCount, ud.WinCount, this);
         }
 
+        // 设置房间列表高度
         // 得到子物体的个数
         int roomCount = GetComponentsInChildren<RoomItem>().Length;
         // 得到原有的size
@@ -114,6 +158,13 @@ public class RoomListPanel : BasePanel
         roomLayout.GetComponent<RectTransform>().sizeDelta = new Vector2(size.x,
             roomCount * (roomItemPrefab.GetComponent<RectTransform>().sizeDelta.y + roomLayout.spacing));
     }
+    
+    // ID 是roomid 房主账号的id是唯一的
+    public void OnJoinClick(int id)
+    {
+        // joinRoomRequest.SendRequest(id);
+    }
+    
 
     // 测试加载房间
     // private void Update()
