@@ -96,7 +96,7 @@ namespace GameServer.Servers
             room.AddClient(client); // 创建房间
             roomList.Add(room); // 交给列表进行管理
         }
-        
+
         // 用来移除房间
         public void RemoveRoom(Room room)
         {
@@ -110,6 +110,18 @@ namespace GameServer.Servers
         public List<Room> GetRoomList()
         {
             return roomList;
+        }
+
+        // 根据id得到房间
+        public Room GetRoomById(int id)
+        {
+            foreach (Room room in roomList)
+            {
+                if (room.GetId() == id)
+                    return room;
+            }
+
+            return null;
         }
     }
 }

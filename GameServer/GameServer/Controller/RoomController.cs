@@ -45,26 +45,31 @@ namespace GameServer.Controller
             }
             return sb.ToString();
         }
-        // public string JoinRoom(string data, Client client, Server server)
-        // {
-        //     int id = int.Parse(data);
-        //     Room room = server.GetRoomById(id);
-        //     if(room == null)
-        //     {
-        //         return ((int)ReturnCode.NotFound).ToString();
-        //     }
-        //     else if (room.IsWaitingJoin() == false)
-        //     {
-        //         return ((int)ReturnCode.Fail).ToString();
-        //     }
-        //     else
-        //     {
-        //         room.AddClient(client);
-        //         string roomData = room.GetRoomData();//"returncode,roletype-id,username,tc,wc|id,username,tc,wc"
-        //         room.BroadcastMessage(client, ActionCode.UpdateRoom, roomData);
-        //         return ((int)ReturnCode.Success).ToString() + "," + ((int)RoleType.Red).ToString()+ "-" + roomData;
-        //     }
-        // }
+        public string JoinRoom(string data, Client client, Server server)
+        {
+            int id = int.Parse(data);
+            // 先得到房间
+            Room room = server.GetRoomById(id);
+            if(room == null)
+            {
+                return ((int)ReturnCode.NotFound).ToString();
+            }
+            // 找到需要判断房间是否可以加入 房间满员
+            else if (room.IsWaitingJoin() == false)
+            {
+                return ((int)ReturnCode.Fail).ToString();
+            }
+            else
+            {
+                // 把客户端添加到房间里
+                room.AddClient(client);
+                // 将房间所有信息返回给客户端
+                string roomData = room.GetRoomData();//"returncode,roletype-id,username,tc,wc|id,username,tc,wc"
+                // room.BroadcastMessage(client, ActionCode.UpdateRoom, roomData);
+                return ((int)ReturnCode.Success) +  "-" + roomData;
+                // "," + ((int)RoleType.Red).ToString()+
+            }
+        }
         // public string QuitRoom(string data, Client client, Server server)
         // {
         //     bool isHouseOwner = client.IsHouseOwner();

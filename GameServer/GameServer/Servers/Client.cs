@@ -47,6 +47,12 @@ namespace GameServer.Servers
             get { return room; }
         }
 
+        // 获取id
+        public int GetUserId()
+        {
+            return user.Id;
+        }
+        
         // 提供UserController设置User和Result的方法
         public void SetUserData(User user, Result result)
         {
