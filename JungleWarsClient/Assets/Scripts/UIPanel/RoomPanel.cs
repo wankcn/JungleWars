@@ -28,10 +28,10 @@ public class RoomPanel : BasePanel
     private UserData ud2 = null;
 
     // 持有request的引用
-    // private CreateRoomRequest crRequest;
-    // private QuitRoomRequest quitRoomRequest;
+    private QuitRoomRequest quitRoomRequest;
     // private StartGameRequest startGameRequest;
 
+    // 默认不弹出面板
     private bool isPopPanel = false;
 
 
@@ -55,7 +55,7 @@ public class RoomPanel : BasePanel
         transform.Find("StartButton").GetComponent<Button>().onClick.AddListener(OnStartClick);
         transform.Find("ExitButton").GetComponent<Button>().onClick.AddListener(OnExitClick);
 
-        // quitRoomRequest = GetComponent<QuitRoomRequest>();
+        quitRoomRequest = GetComponent<QuitRoomRequest>();
         // startGameRequest = GetComponent<StartGameRequest>();
 
         EnterAnim();
@@ -107,11 +107,11 @@ public class RoomPanel : BasePanel
             ud2 = null;
         }
 
-        // if (isPopPanel)
-        // {
-        //     uiMng.PopPanel();
-        //     isPopPanel = false;
-        // }
+        if (isPopPanel)
+        {
+            uiMng.PopPanel();
+            isPopPanel = false;
+        }
     }
 
     // 异步方式 
@@ -159,7 +159,7 @@ public class RoomPanel : BasePanel
     // 退出房间按钮监听
     private void OnExitClick()
     {
-        // quitRoomRequest.SendRequest();
+        quitRoomRequest.SendRequest();
     }
 
     public void OnExitResponse()
