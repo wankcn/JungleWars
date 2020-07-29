@@ -89,7 +89,8 @@ namespace GameServer.Controller
             {
                 // 移除之后通知其他客户端 
                 client.Room.RemoveClient(client);
-                // room.BroadcastMessage(client, ActionCode.UpdateRoom, room.GetRoomData());
+                // 更新时只有一条userdate
+                room.BroadcastMessage(client, ActionCode.UpdateRoom, room.GetRoomData());
                 return ((int)ReturnCode.Success).ToString();
             }
         }
