@@ -101,7 +101,7 @@ public class RoomPanel : BasePanel
             SetLocalPlayerRes(ud1.Username, ud1.TotalCount.ToString(), ud1.WinCount.ToString());
             if (ud2 != null)
                 SetEnemyPlayerRes(ud2.Username, ud2.TotalCount.ToString(), ud2.WinCount.ToString());
-            else
+            else  // ud2为空显示等待玩家加入 进行清空
                 ClearEnemyPlayerRes();
             ud1 = null;
             ud2 = null;
