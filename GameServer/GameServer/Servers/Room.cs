@@ -49,6 +49,23 @@ namespace GameServer.Servers
                 state = RoomState.WaitingBattle;
             }
         }
+        
+        // 玩家移除房间
+        public void RemoveClient(Client client)
+        {
+            client.Room = null;
+            clientRoom.Remove(client); // 集合移除不再管理
+
+            // 设置房间状态
+            if (clientRoom.Count >= 2)
+            {
+                state = RoomState.WaitingBattle;
+            }
+            else
+            {
+                state = RoomState.WaitingJoin;
+            }
+        }
 
         // 得到房主信息 集合中第一个room
         public string GetHouseOwnerData()
@@ -106,5 +123,23 @@ namespace GameServer.Servers
                 }
             }
         }
+        
+        // 判断是否是房主
+        public bool IsHouseOwner(Client client)
+        {
+            // 集合第一位
+            return client == clientRoom[0];
+        }
+        
+        // 退出房间
+        // public void QuitRoom(Client client)
+        // {
+        //     if (client == clientRoom[0])
+        //     {
+        //         // Close();
+        //     }
+        //     else
+        //         clientRoom.Remove(client);
+        // }
     }
 }

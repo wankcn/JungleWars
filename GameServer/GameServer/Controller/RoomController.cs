@@ -71,22 +71,27 @@ namespace GameServer.Controller
                 // "," + ((int)RoleType.Red).ToString()+
             }
         }
-        // public string QuitRoom(string data, Client client, Server server)
-        // {
-        //     bool isHouseOwner = client.IsHouseOwner();
-        //     Room room = client.Room;
-        //     if (isHouseOwner)
-        //     {
-        //         room.BroadcastMessage(client, ActionCode.QuitRoom, ((int)ReturnCode.Success).ToString());
-        //         room.Close();
-        //         return ((int)ReturnCode.Success).ToString();
-        //     }
-        //     else
-        //     {
-        //         client.Room.RemoveClient(client);
-        //         room.BroadcastMessage(client, ActionCode.UpdateRoom, room.GetRoomData());
-        //         return ((int)ReturnCode.Success).ToString();
-        //     }
-        // }
+        
+        // 退出房间，两种情况，是房主和不是房主 
+        public string QuitRoom(string data, Client client, Server server)
+        {
+            
+            bool isHouseOwner = client.IsHouseOwner();
+            Room room = client.Room;
+            if (isHouseOwner)
+            {
+                return "";
+                // room.BroadcastMessage(client, ActionCode.QuitRoom, ((int)ReturnCode.Success).ToString());
+                // room.Close();
+                // return ((int)ReturnCode.Success).ToString();
+            }
+            else
+            {
+                // 移除之后通知其他客户端 
+                client.Room.RemoveClient(client);
+                // room.BroadcastMessage(client, ActionCode.UpdateRoom, room.GetRoomData());
+                return ((int)ReturnCode.Success).ToString();
+            }
+        }
     }
 }

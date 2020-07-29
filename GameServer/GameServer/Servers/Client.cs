@@ -120,7 +120,7 @@ namespace GameServer.Servers
             {
                 room.Close(this);
             }
-            // 先关闭后移除
+            // 先关闭后移除 
             server.RemoveCLient(this);
         }
 
@@ -129,6 +129,12 @@ namespace GameServer.Servers
         {
             byte[] bytes = Message.PackData(actionCode, data);
             clientSocket.Send(bytes);
+        }
+        
+        // 判断是否是房主
+        public bool IsHouseOwner()
+        {
+            return room.IsHouseOwner(this);
         }
     }
 }
