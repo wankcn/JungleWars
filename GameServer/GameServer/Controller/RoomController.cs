@@ -80,10 +80,10 @@ namespace GameServer.Controller
             Room room = client.Room;
             if (isHouseOwner)
             {
-                return "";
-                // room.BroadcastMessage(client, ActionCode.QuitRoom, ((int)ReturnCode.Success).ToString());
-                // room.Close();
-                // return ((int)ReturnCode.Success).ToString();
+                // 先向其他房间广播，让其他客户端进行退出，client房主最后处理 接收到QuitRoom会返回房间列表
+                room.BroadcastMessage(client, ActionCode.QuitRoom, ((int)ReturnCode.Success).ToString());
+                room.Close(); // 当前房主的退出销毁房间
+                return ((int)ReturnCode.Success).ToString();
             }
             else
             {

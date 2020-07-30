@@ -132,14 +132,26 @@ namespace GameServer.Servers
         }
         
         // 退出房间
-        // public void QuitRoom(Client client)
-        // {
-        //     if (client == clientRoom[0])
-        //     {
-        //         // Close();
-        //     }
-        //     else
-        //         clientRoom.Remove(client);
-        // }
+        public void QuitRoom(Client client)
+        {
+            if (client == clientRoom[0])
+            {
+                Close();
+            }
+            else
+                clientRoom.Remove(client);
+        }
+        
+        // 销毁房间
+        public void Close()
+        {
+            // 遍历所有client把他们对room的引用取消掉
+            foreach(Client client in clientRoom)
+            {
+                client.Room = null;
+            }
+            // 房间从server中移除
+            server.RemoveRoom(this);
+        }
     }
 }

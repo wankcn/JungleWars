@@ -36,8 +36,9 @@ namespace GameServer.Controller
         {
             DefaultController defaultController = new DefaultController();
             controllerDict.Add(defaultController.RequestCode, defaultController);
-            controllerDict.Add(RequestCode.User,new UserController());
-            controllerDict.Add(RequestCode.Room,new RoomController());
+            controllerDict.Add(RequestCode.User, new UserController());
+            controllerDict.Add(RequestCode.Room, new RoomController());
+            controllerDict.Add(RequestCode.Game, new GameController());
         }
 
         // 服务端返回给客户端的数据需要处理
