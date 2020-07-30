@@ -29,7 +29,7 @@ public class RoomPanel : BasePanel
 
     // 持有request的引用
     private QuitRoomRequest quitRoomRequest;
-    // private StartGameRequest startGameRequest;
+    private StartGameRequest startGameRequest;
 
     // 默认不弹出面板
     private bool isPopPanel = false;
@@ -56,7 +56,7 @@ public class RoomPanel : BasePanel
         transform.Find("ExitButton").GetComponent<Button>().onClick.AddListener(OnExitClick);
 
         quitRoomRequest = GetComponent<QuitRoomRequest>();
-        // startGameRequest = GetComponent<StartGameRequest>();
+        startGameRequest = GetComponent<StartGameRequest>();
 
         EnterAnim();
     }
@@ -153,8 +153,8 @@ public class RoomPanel : BasePanel
     // 开始游戏的监听
     private void OnStartClick()
     {
-        // startGameRequest.SendRequest();
-    }
+        startGameRequest.SendRequest();
+    } 
 
     // 退出房间按钮监听
     private void OnExitClick()
@@ -167,18 +167,19 @@ public class RoomPanel : BasePanel
         isPopPanel = true;
     }
 
-    // public void OnStartResponse(ReturnCode returnCode)
-    // {
-    //     if (returnCode == ReturnCode.Fail)
-    //     {
-    //         uiMng.ShowMessageSync("您不是房主，无法开始游戏！！");
-    //     }
-    //     else
-    //     {
-    //         uiMng.PushPanelSync(UIPanelType.Game);
-    //         facade.EnterPlayingSync();
-    //     }
-    // }
+    // 开始游戏响应
+    public void OnStartResponse(ReturnCode returnCode)
+    {
+        if (returnCode == ReturnCode.Fail)
+        {
+            uiMng.ShowMessageSync("抱歉，您不是房主，无法开始游戏！！");
+        }
+        else
+        {
+            // uiMng.PushPanelSync(UIPanelType.Game);
+            // facade.EnterPlayingSync();
+        }
+    }
 
     // 添加显示房间面板的动画
     private void EnterAnim()
