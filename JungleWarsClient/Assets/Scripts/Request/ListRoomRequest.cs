@@ -27,18 +27,17 @@ public class ListRoomRequest : BaseRequest
     // data是服务器端发送来的房间列表信息（玩家信息用逗号分割，房间之间用"｜"分割），根据列表信息加载房间列表 
     public override void OnResponse(string data)
     {
-        List<UserData> udList = new List<UserData>(); // 保存一个房间信息，利用房间信息创建列表
+        List<UserData> udList = new List<UserData>();
         if (data != "0")
         {
             string[] udArray = data.Split('|');
             foreach (string ud in udArray)
             {
                 string[] strs = ud.Split(',');
-                // 信息添加进集合里
                 udList.Add(new UserData(int.Parse(strs[0]), strs[1], int.Parse(strs[2]), int.Parse(strs[3])));
             }
-
-            roomListPanel.LoadRoomItemSync(udList);
         }
+        
+        roomListPanel.LoadRoomItemSync(udList);
     }
 }
