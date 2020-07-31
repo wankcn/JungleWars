@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Common;
 
-public class GamePanel : BasePanel {
-
+public class GamePanel : BasePanel
+{
     private Text timer;
-    // private int time = -1;
+
+    private int time = -1; // 默认不显示
     // private Button successBtn;
     // private Button failBtn;
     // private Button exitBtn;
@@ -17,7 +18,7 @@ public class GamePanel : BasePanel {
     private void Start()
     {
         timer = transform.Find("Timer").GetComponent<Text>();
-        // timer.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
         // successBtn = transform.Find("SuccessButton").GetComponent<Button>();
         // successBtn.onClick.AddListener(OnResultClick);
         // successBtn.gameObject.SetActive(false);
@@ -29,7 +30,6 @@ public class GamePanel : BasePanel {
         // exitBtn.gameObject.SetActive(false);
 
         // quitBattleRequest = GetComponent<QuitBattleRequest>();
-
     }
     // public override void OnEnter()
     // {
@@ -42,14 +42,16 @@ public class GamePanel : BasePanel {
     //     exitBtn.gameObject.SetActive(false);
     //     gameObject.SetActive(false);
     // }
-    // private void Update()
-    // {
-    //     if (time > -1)
-    //     {
-    //         ShowTime(time);
-    //         time = -1;
-    //     }
-    // }
+
+    // 控制时间显示
+    private void Update()
+    {
+        if (time > -1)
+        {
+            ShowTime(time);
+            time = -1;
+        }
+    }
     // private void OnResultClick()
     // {
     //     uiMng.PopPanel();
@@ -64,30 +66,32 @@ public class GamePanel : BasePanel {
     // {
     //     OnResultClick();
     // }
-    // public void ShowTimeSync(int time)
-    // {
-    //     this.time = time;
-    // }
+
+    // 异步显示时间
+    public void ShowTimeSync(int time)
+    {
+        this.time = time;
+    }
+
     public void ShowTime(int time)
     {
         // if (time == 3)
         // {
         //     exitBtn.gameObject.SetActive(true);
         // }
-        // timer.gameObject.SetActive(true);
+        timer.gameObject.SetActive(true);
         timer.text = time.ToString();
-        // timer.transform.localScale = Vector3.one;
-        // Color tempColor = timer.color;
-        // tempColor.a = 1;
-        // timer.color = tempColor;
+        timer.transform.localScale = Vector3.one; // 大小重置
+        Color tempColor = timer.color;
+        tempColor.a = 1; // 1显示
+        timer.color = tempColor;
         // 从小到大 SetDelay设置延迟
         timer.transform.DOScale(2, 0.3f).SetDelay(0.3f);
         // 进行隐藏
-        timer.DOFade(0, 0.3f).SetDelay(0.3f);
-            // .OnComplete(() => timer.gameObject.SetActive(false));
+        timer.DOFade(0, 0.3f).SetDelay(0.3f).OnComplete(() => timer.gameObject.SetActive(false));
         facade.PlayNormalSound(AudioManager.Sound_Alert);
     }
-    
+
     // public void OnGameOverResponse(ReturnCode returnCode)
     // {
     //     Button tempBtn = null;
@@ -104,5 +108,4 @@ public class GamePanel : BasePanel {
     //     tempBtn.transform.localScale = Vector3.zero;
     //     tempBtn.transform.DOScale(1, 0.5f);
     // }
-
 }
