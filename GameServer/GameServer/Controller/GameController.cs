@@ -16,9 +16,10 @@ namespace GameServer.Controller
             // 判断是否是房主，房主成功，不是房主失败
             if (client.IsHouseOwner())
             {
+                // 广播其他客户端可以开始游戏
                 Room room =  client.Room;
                 room.BroadcastMessage(client, ActionCode.StartGame, ((int)ReturnCode.Success).ToString());
-                room.StartTimer();
+                // room.StartTimer();
                 return ((int)ReturnCode.Success).ToString();
             }
             else

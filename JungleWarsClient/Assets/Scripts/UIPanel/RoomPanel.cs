@@ -176,7 +176,8 @@ public class RoomPanel : BasePanel
         }
         else
         {
-            // uiMng.PushPanelSync(UIPanelType.Game);
+            // 切换到游戏面板 异步线程
+            uiMng.PushPanelSync(UIPanelType.Game);
             // facade.EnterPlayingSync();
         }
     }
