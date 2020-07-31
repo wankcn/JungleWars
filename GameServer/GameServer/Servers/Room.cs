@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Common;
 
 namespace GameServer.Servers
@@ -153,5 +154,58 @@ namespace GameServer.Servers
             // 房间从server中移除
             server.RemoveRoom(this);
         }
+        
+        // 开始计时器
+        public void StartTimer()
+        {
+            // 启动
+            new Thread(RunTimer).Start();
+        }
+        
+        // 线程方法
+        private void RunTimer()
+        {
+            Thread.Sleep(1000); //暂停1s
+            for (int i = 3; i > 0; i--)
+            {
+                // 每次执行把i发送给客户端执行事件 在客户端解析i显示在界面上
+                BroadcastMessage(null, ActionCode.ShowTimer, i.ToString());
+                Thread.Sleep(1000);
+            }
+            // 计时结束后开始游戏
+            BroadcastMessage(null, ActionCode.StartPlay, "r");
+        }
+        
+        
+        // public void TakeDamage(int damage,Client excludeClient)
+        // {
+        //     bool isDie = false;
+        //     foreach (Client client in clientRoom)
+        //     {
+        //         if (client != excludeClient)
+        //         {
+        //             if (client.TakeDamage(damage))
+        //             {
+        //                 isDie = true;
+        //             }
+        //         }
+        //     }
+        //     if (isDie == false) return;
+        //     //如果其中一个角色死亡，要结束游戏
+        //     foreach (Client client in clientRoom)
+        //     {
+        //         if (client.IsDie())
+        //         {
+        //             client.UpdateResult(false);
+        //             client.Send(ActionCode.GameOver, ((int)ReturnCode.Fail).ToString());
+        //         }
+        //         else
+        //         {
+        //             client.UpdateResult(true);
+        //             client.Send(ActionCode.GameOver, ((int)ReturnCode.Success).ToString());
+        //         }
+        //     }
+        //     Close();
+        // }
     }
 }

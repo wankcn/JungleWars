@@ -19,7 +19,7 @@ namespace GameServer.Controller
                 // 广播其他客户端可以开始游戏
                 Room room =  client.Room;
                 room.BroadcastMessage(client, ActionCode.StartGame, ((int)ReturnCode.Success).ToString());
-                // room.StartTimer();
+                room.StartTimer(); // 开启计时
                 return ((int)ReturnCode.Success).ToString();
             }
             else
