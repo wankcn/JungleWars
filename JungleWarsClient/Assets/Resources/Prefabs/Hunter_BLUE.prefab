@@ -855,8 +855,8 @@ GameObject:
   - component: {fileID: 95012688493033316}
   - component: {fileID: 54429222584143056}
   - component: {fileID: 136732122695249130}
-  - component: {fileID: -4501181620554583674}
-  - component: {fileID: 2215221824202660400}
+  - component: {fileID: 842450462778017459}
+  - component: {fileID: 6860835878874714350}
   m_Layer: 8
   m_Name: Hunter_BLUE
   m_TagString: Untagged
@@ -930,7 +930,7 @@ CapsuleCollider:
   m_Height: 1.9785066
   m_Direction: 1
   m_Center: {x: 0.13, y: 1, z: 0.05}
---- !u!114 &-4501181620554583674
+--- !u!114 &842450462778017459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -942,7 +942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee3b17561374409f8c1590e4af7f5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2215221824202660400
+  forward: 0
+--- !u!114 &6860835878874714350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

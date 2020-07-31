@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // public float forward = 0;
+    public float forward = 0;
 
     private float speed = 3;
     private Animator anim; // 控制动画
@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
             // 朝向设置与按键方向一致
             transform.rotation = Quaternion.LookRotation(new Vector3(h, 0, v));
             float res = Mathf.Max(Mathf.Abs(h), Mathf.Abs(v));
-            // forward = res;
+            forward = res;
             anim.SetFloat("Forward", res);
         }
     }
