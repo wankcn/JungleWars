@@ -38,7 +38,7 @@ public class AudioManager : BaseManager
     // 播放普通声音用于外界播放 通过字符串加载声音 
     public void PlayNormalSound(string soundName)
     {
-        PlaySound(normalAudioSource, LoadSound(soundName), 1f);
+        PlaySound(normalAudioSource, LoadSound(soundName), 0.5f);
     }
 
     // 播放背景声音用于外界播放
